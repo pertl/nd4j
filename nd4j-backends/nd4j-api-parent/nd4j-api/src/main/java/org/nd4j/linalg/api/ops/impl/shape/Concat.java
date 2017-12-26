@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import onnx.OnnxProto3;
 import org.nd4j.autodiff.samediff.SameDiff;
+import org.nd4j.imports.NoOpNameFoundException;
 import org.nd4j.linalg.api.ops.DynamicCustomOp;
 import org.nd4j.linalg.api.ops.Op;
 import org.nd4j.linalg.exception.ND4JIllegalStateException;
@@ -39,6 +40,28 @@ public class Concat extends DynamicCustomOp {
               concatDimension = var.getArr().getInt(0);
               addIArgument(concatDimension);
           }
+    }
+
+    @Override
+    public void assertValidForExecution() {
+        val descriptor = getDescriptor();
+        if(descriptor == null)
+            throw new NoOpNameFoundException("No descriptor found for op name " + opName());
+
+
+        if(descriptor.getNumInputs() > 0 && numInputArguments() < 2)
+            throw new ND4JIllegalStateException("Op failure for " + opName() + " Number of inputs is invalid for execution. Specified " + numInputArguments() + " but should be " + descriptor.getNumInputs());
+
+        if(descriptor.getNumOutputs() > 0 && numOutputArguments() != descriptor.getNumOutputs())
+            throw new ND4JIllegalStateException("Op failure for " + opName() + " Number of outputs is invalid for execution. Specified " + numOutputArguments() + " but should be " + descriptor.getNumInputs());
+
+        //< 0 means dynamic size
+        if(descriptor.getNumIArgs() >= 0 && numIArguments() != descriptor.getNumIArgs())
+            throw new ND4JIllegalStateException("Op failure for " + opName() + " Number of integer arguments is invalid for execution. Specified " + numIArguments() + " but should be " + descriptor.getNumIArgs());
+
+        if(descriptor.getNumTArgs() >= 0 && numTArguments() != descriptor.getNumTArgs())
+            throw new ND4JIllegalStateException("Op failure for " + opName() + " Number of inputs is invalid for execution. Specified " + numTArguments() + " but should be " + descriptor.getNumTArgs());
+
     }
 
     @Override

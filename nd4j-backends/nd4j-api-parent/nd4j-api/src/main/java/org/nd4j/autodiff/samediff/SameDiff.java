@@ -557,7 +557,7 @@ public class SameDiff {
     /**
      * Associate a vertex id with the given shape.
      * @param varName the vertex id to associate
-     * @param shape the shape to assciate with
+     * @param shape the shape to associate with
      */
     public void putShapeForVarName(String varName, int[] shape) {
         if(shape == null || shape.length < 2) {

@@ -11,6 +11,9 @@ import org.tensorflow.framework.AttrValue;
 import org.tensorflow.framework.GraphDef;
 import org.tensorflow.framework.NodeDef;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class Fill extends DynamicCustomOp {
@@ -54,6 +57,27 @@ public class Fill extends DynamicCustomOp {
         if(descriptor.getNumTArgs() >= 0 && numTArguments() < 1)
             throw new ND4JIllegalStateException("Op failure for " + opName() + " Number of inputs is invalid for execution. Specified " + numTArguments() + " but should be " + descriptor.getNumTArgs());
 
+    }
+
+
+    @Override
+    public List<int[]> calculateOutputShape() {
+        if(args().length < 2)
+            return Collections.emptyList();
+
+        val shape = args()[0].getArr();
+        if(shape == null)
+            return Collections.emptyList();
+        else {
+            if(shape.length() == 1) {
+                if(shape.getDouble(0) < 1)
+                    return Arrays.asList(new int[]{1,1});
+                else
+                    return Arrays.asList(new int[]{1,shape.getInt(0)});
+            }
+        }
+
+        return Arrays.asList(shape.data().asInt());
     }
 
     @Override
