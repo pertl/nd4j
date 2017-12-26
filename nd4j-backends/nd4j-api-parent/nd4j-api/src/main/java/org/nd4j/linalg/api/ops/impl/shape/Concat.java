@@ -79,10 +79,6 @@ public class Concat extends DynamicCustomOp {
                 concatDimension = arr.getInt(0);
             }
 
-            // if that's convolution graph, we should swap dimensions
-            if (concatDimension == 3)
-                concatDimension = 1;
-
             this.concatDimension = concatDimension;
             addIArgument(this.concatDimension);
             log.debug("Concat dimension: {}", concatDimension);
