@@ -100,6 +100,31 @@ public class SameDiff {
     private Map<String,List<DifferentialFunction>> functionsArgsFor;
     private Map<String,List<DifferentialFunction>> functionOutputFor;
 
+    /**
+     * For import, many times we have variables
+     * that map to properties. Most common
+     * we will have an input to a function that is mapped to an ndarray.
+     * That ndarray is usually a scalar shape.
+     *
+     * That array with a scalar shape can be something like an axis.
+     *
+     * We often don't know that array's value till run time.
+     * This map stores variable names  that we should resolve
+     * from samediff. We use the value of that array
+     * to update the properties.
+     */
+    private Map<String,List<String>> propertiesToResolve;
+
+    /**
+     * A map of own name to
+     * the properties of the function (things like execution axes etc)
+     * The valid values can be:
+     * int
+     * long
+     * INDArray
+     */
+    private Map<String,Map<String,Object>> propertiesForFunction;
+
 
     private Map<String,List<String[]>> placeHolderMap;
     private Map<String,int[]> placeHolderOriginalShapes;
@@ -313,9 +338,9 @@ public class SameDiff {
                     function,
                     function.getSameDiff());
             clone.setSameDiff(sameDiff);
-            clone.setInstanceId(function.getInstanceId());
-            sameDiff.putFunctionForId(function.getInstanceId(),function);
-            newFunctions.put(function.getInstanceId(),clone);
+            clone.setOwnName(function.getOwnName());
+            sameDiff.putFunctionForId(function.getOwnName(),function);
+            newFunctions.put(function.getOwnName(),clone);
 
             val argsForFunction = function.args();
             val outputsForFunction = function.outputVariables();
@@ -347,7 +372,7 @@ public class SameDiff {
 
 
     /**
-     * Get the function by the {@link DifferentialFunction#getInstanceId()}
+     * Get the function by the {@link DifferentialFunction#getOwnName()}
      * @param id the id of the function
      * @return the function for the given id if it exists
      */
@@ -382,9 +407,9 @@ public class SameDiff {
      * @return the input ids for a given function
      */
     public String[] getInputsForFunction(DifferentialFunction function) {
-        if(!incomingArgsReverse.containsKey(function.getInstanceId()))
-            throw new ND4JIllegalStateException("Illegal function instance id found " + function.getInstanceId());
-        return incomingArgsReverse.get(function.getInstanceId());
+        if(!incomingArgsReverse.containsKey(function.getOwnName()))
+            throw new ND4JIllegalStateException("Illegal function instance id found " + function.getOwnName());
+        return incomingArgsReverse.get(function.getOwnName());
     }
 
     /**
@@ -394,7 +419,7 @@ public class SameDiff {
      * @return the outputs ids for a given function
      */
     public String[] getOutputsForFunction(DifferentialFunction function) {
-        return outgoingArgsReverse.get(function.getInstanceId());
+        return outgoingArgsReverse.get(function.getOwnName());
     }
 
 
@@ -720,8 +745,120 @@ public class SameDiff {
         baseNameForFunctionInstanceId = new LinkedHashMap<>();
         importedVarName = new LinkedHashSet<>();
         permuteOrder = new LinkedHashMap<>();
+        propertiesToResolve = new LinkedHashMap<>();
+        propertiesForFunction = new LinkedHashMap<>();
 
     }
+
+    /**
+     * Adds a property that needs to be resolve for later.
+     * These variables are typically values that are arrays
+     * that are named but have an unknown value till execution time.
+     *
+     * This is very common for model import.
+     * @param forFunction the function to add the property to resolve for
+     * @param arrayName the array name
+     */
+    public void addPropertyToResolve(DifferentialFunction forFunction,String arrayName) {
+        if(!propertiesToResolve.containsKey(forFunction.getOwnName())) {
+            List<String> newVal = new ArrayList<>();
+            newVal.add(arrayName);
+            propertiesToResolve.put(forFunction.getOwnName(),newVal);
+        }
+        else {
+            List<String> newVal = propertiesToResolve.get(forFunction.getOwnName());
+            newVal.add(arrayName);
+        }
+
+    }
+
+    /**
+     * Return the properties to resolve for the given function.
+     * This is typically used right before execution in model import in
+     * {@link DifferentialFunction#resolvePropertiesFromSameDiffBeforeExecution()}
+     * @param function the function get the properties to resolve for
+     * @return the properties to resolve for the given function
+     */
+    public List<String> propertiesToResolveForFunction(DifferentialFunction function) {
+        if(!propertiesToResolve.containsKey(function.getOwnName()))
+            return Collections.emptyList();
+
+        return propertiesToResolve.get(function.getOwnName());
+    }
+
+
+    /**
+     * Returns true if the given function
+     * has ndarray properties to resolve.
+     *
+     * @param function the function to check
+     * @return true if the function has yet to be resolved properties
+     */
+    public boolean hasPropertiesToResolve(DifferentialFunction function) {
+        return propertiesToResolve.containsKey(function.getOwnName());
+    }
+
+
+    /**
+     * Get the property for a given function
+     * @param functionInstance the function to get the
+     *                         property for
+     * @param propertyName the name of the property to get
+     * @param <T> the inferred return type
+     * @return the property for the given function
+     */
+    public <T> T getPropertyForFunction(DifferentialFunction functionInstance,String propertyName) {
+        if(!propertiesForFunction.containsKey(functionInstance.getOwnName())) {
+            return null;
+        }
+        else {
+            val map = propertiesForFunction.get(functionInstance.getOwnName());
+            return (T) map.get(propertyName);
+
+        }
+    }
+
+    /**
+     * Add a property for the given function
+     * @param functionFor the function add a property for
+     * @param propertyName the property name
+     * @param property the property value
+     */
+    public void addPropertyForFunction(DifferentialFunction functionFor,String propertyName,INDArray property) {
+        addPropertyForFunction(functionFor,propertyName,(Object) property);
+    }
+
+
+    /**
+     *  Add a property for the given function
+     * @param functionFor the function to add the property for
+     * @param propertyName the name of the property to add the value for
+     * @param property the property value to add
+     */
+    public void addPropertyForFunction(DifferentialFunction functionFor,String propertyName,long property) {
+        addPropertyForFunction(functionFor,propertyName,(Object) property);
+    }
+
+
+
+    private void addPropertyForFunction(DifferentialFunction functionFor,String propertyName,Object propertyValue) {
+        if(!propertiesForFunction.containsKey(functionFor.getOwnName())) {
+            Map<String,Object> fields = new LinkedHashMap<>();
+            fields.put(propertyName,propertyValue);
+            propertiesForFunction.put(functionFor.getOwnName(),fields);
+        }
+        else {
+            val fieldMap = propertiesForFunction.get(functionFor.getOwnName());
+            if(fieldMap.containsKey(propertyName)) {
+                throw new ND4JIllegalStateException("Attempting to override property " + propertyName);
+            }
+
+            fieldMap.put(propertyName,propertyValue);
+        }
+    }
+
+
+
 
 
     /**
@@ -754,7 +891,7 @@ public class SameDiff {
      * @param function the function to declare a base name for.
      */
     public void setBaseNameForFunctionInstanceId(String baseName,DifferentialFunction function) {
-        baseNameForFunctionInstanceId.put(function.getInstanceId(),baseName);
+        baseNameForFunctionInstanceId.put(function.getOwnName(),baseName);
     }
 
     /**
@@ -765,7 +902,7 @@ public class SameDiff {
      * on the function's instance id.
      */
     public String getBaseNameForFunction(DifferentialFunction function) {
-        return baseNameForFunctionInstanceId.get(function.getInstanceId());
+        return baseNameForFunctionInstanceId.get(function.getOwnName());
     }
 
 
@@ -825,10 +962,10 @@ public class SameDiff {
      */
     public void addOutgoingFor(String[] varNames, DifferentialFunction function) {
 
-        if(function.getInstanceId() == null)
+        if(function.getOwnName() == null)
             throw new ND4JIllegalStateException("Instance id can not be null. Function not initialized properly");
 
-        if(outgoingArgsReverse.containsKey(function.getInstanceId())) {
+        if(outgoingArgsReverse.containsKey(function.getOwnName())) {
             throw new ND4JIllegalStateException("Outgoing arguments already declared for " + function);
         }
 
@@ -841,7 +978,7 @@ public class SameDiff {
                 throw new ND4JIllegalStateException("Variable name elements can not be null!");
         }
 
-        outgoingArgsReverse.put(function.getInstanceId(),varNames);
+        outgoingArgsReverse.put(function.getOwnName(),varNames);
         outgoingArgs.put(varNames,function);
 
         for(val resultName : varNames) {
@@ -862,19 +999,19 @@ public class SameDiff {
      * @param function
      */
     public void addArgsFor(String[] variables, DifferentialFunction function) {
-        if(function.getInstanceId() == null)
+        if(function.getOwnName() == null)
             throw new ND4JIllegalStateException("Instance id can not be null. Function not initialized properly");
 
         //double check if function contains placeholder args
         for(val varName : variables) {
             if(isPlaceHolder(varName)) {
-                placeHolderFunctions.add(function.getInstanceId());
+                placeHolderFunctions.add(function.getOwnName());
             }
         }
 
 
         incomingArgs.put(variables,function);
-        incomingArgsReverse.put(function.getInstanceId(),variables);
+        incomingArgsReverse.put(function.getOwnName(),variables);
         for(val variableName : variables) {
             List<DifferentialFunction> funcs = functionsArgsFor.get(variableName);
             if(funcs == null) {
@@ -924,7 +1061,7 @@ public class SameDiff {
      * @return true if the function has args false otherwise
      */
     public boolean hasArgs(DifferentialFunction function) {
-        val vertexIdArgs = incomingArgsReverse.get(function.getInstanceId());
+        val vertexIdArgs = incomingArgsReverse.get(function.getOwnName());
         if(vertexIdArgs != null) {
             val args = incomingArgs.get(vertexIdArgs);
             if(args != null)
@@ -3249,7 +3386,7 @@ public class SameDiff {
                 val descriptor = customOp.getDescriptor();
                 //can't guess number of outputs, variable
                 if(descriptor == null || descriptor.getNumOutputs() <= 0) {
-                   throw new ND4JIllegalStateException("No output variables found!");
+                    throw new ND4JIllegalStateException("No output variables found!");
                 }
                 else {
                     SDVariable[] ret = new SDVariable[descriptor.getNumOutputs()];
@@ -3927,6 +4064,19 @@ public class SameDiff {
             updateShapeForVarName(entry.getKey(),entry.getValue().shape());
             associateArrayWithVariable(entry.getValue(),getVariable(entry.getKey()));
             updateArrayForVarName(entry.getKey(),entry.getValue());
+
+        }
+
+        for(val funcName : propertiesToResolve.keySet()) {
+            val func = functionInstancesById.get(funcName);
+            if(!functionInstancesById.containsKey(funcName)) {
+                throw new ND4JIllegalStateException("Unable to resolve function name " + funcName);
+            }
+
+            if(func instanceof CustomOp) {
+                CustomOp customOp = (CustomOp) func;
+                customOp.populateInputsAndOutputsFromSameDiff();
+            }
 
         }
 
