@@ -62,9 +62,6 @@ public abstract class DifferentialFunction {
     protected  boolean arrayInitialized = false;
 
     @Getter
-    private String instanceId;
-
-    @Getter
     @Setter
     private String ownName;
 
@@ -254,6 +251,10 @@ public abstract class DifferentialFunction {
 
 
 
+    public void resolvePropertiesFromSameDiffBeforeExecution() {
+
+    }
+
     public SDVariable arg() {
         return args()[0];
     }
@@ -283,10 +284,10 @@ public abstract class DifferentialFunction {
 
 
     protected void setInstanceId() {
-        if(instanceId == null) {
-            this.instanceId = UUID.randomUUID().toString();
+        if(ownName == null) {
+            this.ownName =  sameDiff == null ? UUID.randomUUID().toString() : sameDiff.generateNewVarName(opName(),0);
             if(sameDiff != null)
-                sameDiff.putFunctionForId(instanceId,this);
+                sameDiff.putFunctionForId(ownName,this);
         }
     }
 
@@ -429,7 +430,7 @@ public abstract class DifferentialFunction {
         if (arrayInitialized != that.arrayInitialized) return false;
         if (scalarValue != null ? !scalarValue.equals(that.scalarValue) : that.scalarValue != null) return false;
         if (!Arrays.equals(dimensions, that.dimensions)) return false;
-        return instanceId != null ? instanceId.equals(that.instanceId) : that.instanceId == null;
+        return ownName != null ? ownName.equals(that.ownName) : that.ownName == null;
     }
 
     @Override
@@ -440,7 +441,7 @@ public abstract class DifferentialFunction {
         result = 31 * result + Arrays.hashCode(dimensions);
         result = 31 * result + (isArrayInit ? 1 : 0);
         result = 31 * result + (arrayInitialized ? 1 : 0);
-        result = 31 * result + (instanceId != null ? instanceId.hashCode() : 0);
+        result = 31 * result + (ownName != null ? ownName.hashCode() : 0);
         return result;
     }
 

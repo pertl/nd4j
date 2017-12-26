@@ -23,46 +23,49 @@ public class Concat extends DynamicCustomOp {
     }
 
 
+    @Override
+    public void resolvePropertiesFromSameDiffBeforeExecution() {
+          val propertiesToResolve = sameDiff.propertiesToResolveForFunction(this);
+          if(!propertiesToResolve.isEmpty()) {
+              val varName = propertiesToResolve.get(0);
+              val var = sameDiff.getVariable(varName);
+              if(var == null) {
+                  throw new ND4JIllegalStateException("No variable found with name " +varName);
+              }
+              else if(var.getArr() == null) {
+                  throw new ND4JIllegalStateException("Array with variable name " + varName + " unset!");
+              }
 
+              concatDimension = var.getArr().getInt(0);
+              addIArgument(concatDimension);
+          }
+    }
 
     @Override
     public void initFromTensorFlow(NodeDef nodeDef, SameDiff initWith, Map<String, AttrValue> attributesForNode, GraphDef graph) {
-        int idx = -1;
-        int cnt = 0;
-        int concatDimension = 0;
-        for (int i = 0; i < nodeDef.getInputCount(); i++) {
-            val input = nodeDef.getInput(i);
-            val variable = initWith.getVariable(input);
-            // concat dimension is only possible
-            if (variable != null && variable.getArr() == null) {
-                idx = cnt;
-                if(variable.getShape() != null)
-                    concatDimension = variable.getShape()[0];
-                break;
-            } else if (variable != null) {
-                val arr = variable.getArr();
-                if (arr.length() == 1) {
-                    concatDimension = arr.getInt(0);
-                    idx = cnt;
-                    break;
-                }
+        int concatDimension = -1;
+        val input = nodeDef.getInput(nodeDef.getInputCount() - 1);
+        val variable = initWith.getVariable(input);
+        // concat dimension is only possible
+        if (variable != null && variable.getArr() == null) {
+            sameDiff.addPropertyToResolve(this, input);
+
+        } else if (variable != null) {
+            val arr = variable.getArr();
+            if (arr.length() == 1) {
+                concatDimension = arr.getInt(0);
             }
-            cnt++;
+
+            // if that's convolution graph, we should swap dimensions
+            if (concatDimension == 3)
+                concatDimension = 1;
+
+            this.concatDimension = concatDimension;
+            addIArgument(this.concatDimension);
+            log.debug("Concat dimension: {}", concatDimension);
+
         }
-
-        if (idx < 0)
-            throw new ND4JIllegalStateException("Can't find dimension for concatenatiion");
-
-        // if that's convolution graph, we should swap dimensions
-        if (concatDimension == 3)
-            concatDimension = 1;
-
-        this.concatDimension = concatDimension;
-        addIArgument(this.concatDimension);
-        log.debug("Concat dimension: {}", concatDimension);
-
     }
-
 
     @Override
     public void initFromOnnx(OnnxProto3.NodeProto node, SameDiff initWith, Map<String, OnnxProto3.AttributeProto> attributesForNode, OnnxProto3.GraphProto graph) {
@@ -87,6 +90,6 @@ public class Concat extends DynamicCustomOp {
 
     @Override
     public Op.Type opType() {
-        return Op.Type.SHAPE;
+        return Op.Type.CUSTOM;
     }
 }

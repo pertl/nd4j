@@ -117,7 +117,7 @@ public class While extends DifferentialFunction implements CustomOp {
         this.trueBody = trueBody;
         this.blockName = blockName;
         this.dummyResult =  parent.var("dummyresult-" + UUID.randomUUID().toString(),new int[]{1,1},new ZeroInitScheme('f'));
-        parent.putFunctionForId(getInstanceId(),this);
+        parent.putFunctionForId(getOwnName(),this);
 
         parent.addArgsFor(inputVars,this);
         parent.addOutgoingFor(new SDVariable[]{dummyResult},this);
