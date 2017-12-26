@@ -51,7 +51,7 @@ public class Fill extends DynamicCustomOp {
         if(descriptor.getNumIArgs() >= 0 && numIArguments() != descriptor.getNumIArgs())
             throw new ND4JIllegalStateException("Op failure for " + opName() + " Number of integer arguments is invalid for execution. Specified " + numIArguments() + " but should be " + descriptor.getNumIArgs());
 
-        if(descriptor.getNumTArgs() >= 0 && numTArguments() != descriptor.getNumTArgs())
+        if(descriptor.getNumTArgs() >= 0 && numTArguments() < 1)
             throw new ND4JIllegalStateException("Op failure for " + opName() + " Number of inputs is invalid for execution. Specified " + numTArguments() + " but should be " + descriptor.getNumTArgs());
 
     }
