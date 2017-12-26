@@ -25,8 +25,8 @@ import org.nd4j.autodiff.samediff.SDVariable;
 import org.nd4j.autodiff.samediff.SameDiff;
 import org.nd4j.imports.NoOpNameFoundException;
 import org.nd4j.imports.graphmapper.tf.TFGraphMapper;
-import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.api.ops.DynamicCustomOp;
+import org.nd4j.linalg.exception.ND4JIllegalStateException;
 import org.tensorflow.framework.AttrValue;
 import org.tensorflow.framework.GraphDef;
 import org.tensorflow.framework.NodeDef;
@@ -63,6 +63,17 @@ public class StridedSlice extends DynamicCustomOp {
         return "StridedSlice";
     }
 
+
+    @Override
+    public void assertValidForExecution() {
+        if(numInputArguments() != 1 && numInputArguments() != 3 && numInputArguments() != 4) {
+            throw new ND4JIllegalStateException("Num input arguments must be 1 3 or 4.");
+        }
+
+        if(numIArguments() < 5) {
+            throw new ND4JIllegalStateException("Number of integer arguments must >= 5");
+        }
+    }
 
     @Override
     public void initFromTensorFlow(NodeDef nodeDef, SameDiff initWith, Map<String, AttrValue> attributesForNode, GraphDef graph) {
@@ -131,10 +142,6 @@ public class StridedSlice extends DynamicCustomOp {
 
     }
 
-
-    @Override
-    public void initWithArrays(Map<String, INDArray> arrayMap, Object... extraArgs) {
-    }
 
     @Override
     public List<SDVariable> doDiff(List<SDVariable> i_v) {

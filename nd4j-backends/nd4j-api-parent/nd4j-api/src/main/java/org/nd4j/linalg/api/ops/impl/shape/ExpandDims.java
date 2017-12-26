@@ -26,6 +26,7 @@ import org.nd4j.imports.NoOpNameFoundException;
 import org.nd4j.imports.graphmapper.tf.TFGraphMapper;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.api.ops.DynamicCustomOp;
+import org.nd4j.linalg.exception.ND4JIllegalStateException;
 import org.tensorflow.framework.AttrValue;
 import org.tensorflow.framework.GraphDef;
 import org.tensorflow.framework.NodeDef;
@@ -77,6 +78,24 @@ public class ExpandDims extends DynamicCustomOp {
             this.axis = Integer.MAX_VALUE;
             addIArgument(this.axis);
         }
+    }
+
+    @Override
+    public void assertValidForExecution() {
+        val descriptor = getDescriptor();
+        if(descriptor.getNumInputs() > 0 && numInputArguments() >  2 || numInputArguments() < 1)
+            throw new ND4JIllegalStateException("Op failure for " + opName() + " Number of inputs is invalid for execution. Specified " + numInputArguments() + " but should be " + descriptor.getNumInputs());
+
+        if(descriptor.getNumOutputs() > 0 && numOutputArguments() != descriptor.getNumOutputs())
+            throw new ND4JIllegalStateException("Op failure for " + opName() + " Number of outputs is invalid for execution. Specified " + numOutputArguments() + " but should be " + descriptor.getNumInputs());
+
+        //< 0 means dynamic size
+        if(descriptor.getNumIArgs() >= 0 && numIArguments() != descriptor.getNumIArgs())
+            throw new ND4JIllegalStateException("Op failure for " + opName() + " Number of integer arguments is invalid for execution. Specified " + numIArguments() + " but should be " + descriptor.getNumIArgs());
+
+        if(descriptor.getNumTArgs() >= 0 && numTArguments() != descriptor.getNumTArgs())
+            throw new ND4JIllegalStateException("Op failure for " + opName() + " Number of inputs is invalid for execution. Specified " + numTArguments() + " but should be " + descriptor.getNumTArgs());
+
     }
 
     @Override
