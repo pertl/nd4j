@@ -165,35 +165,18 @@ public class DynamicCustomOp extends DifferentialFunction implements CustomOp {
             }
 
 
-            for(int i = 0; i < newVars.length; i++) {
-                INDArray arr = null;
-                if(Shape.isPlaceholderShape(newVars[i].getShape())) {
-                    if(newVars[i].getShape() == null) {
-                        val shape = calculateOutputShape();
-                        if(!shape.isEmpty()) {
-                            if(shape.get(i) != null && !Shape.isPlaceholderShape(shape.get(i))) {
-                                sameDiff.putShapeForVarName(newVars[i].getVarName(),shape.get(i));
-                                arr = newVars[i].storeAndAllocateNewArray();
-                            }
-
-                        }
-
-                        else
-                            arr = null;
-                    }
-
+            val outputShapes = calculateOutputShape();
+            if(newVars != null && outputShapes != null && !outputShapes.isEmpty()) {
+                for (int i = 0; i < newVars.length; i++) {
+                    if (newVars[i] == null)
+                        continue;
+                    INDArray arr = attemptToGetOrCreateArrForVar(newVars[i], outputShapes.get(i));
                 }
-                else if(sameDiff.getArrForVarName(newVars[i].getVarName()) == null) {
-                    if(newVars[i].getShape()  != null)
-                        arr = newVars[i].storeAndAllocateNewArray();
-                }
-                else {
-                    arr = newVars[i].getArr();
-                }
-
-                if(arr != null)
-                    addOutputArgument(arr);
             }
+
+            else
+                return new SDVariable[0];
+
 
             outputVariables = newVars;
             if(sameDiff.getOutputsForFunction(this) == null)
@@ -201,7 +184,50 @@ public class DynamicCustomOp extends DifferentialFunction implements CustomOp {
             return newVars;
         }
 
+        else {
+            for(int i = 0; i < outputVariables.length; i++) {
+                val var = outputVariables[i];
+                val shape = calculateOutputShape();
+                if(var.getShape() == null) {
+                    attemptToGetOrCreateArrForVar(var,shape.get(i));
+                }
+            }
+        }
+
         return outputVariables;
+    }
+
+
+    private INDArray attemptToGetOrCreateArrForVar(SDVariable var,int[] currShape) {
+        INDArray arr = null;
+        if(Shape.isPlaceholderShape(var.getShape())) {
+            if(var.getShape() == null) {
+                val shape = calculateOutputShape();
+                if(!shape.isEmpty()) {
+                    if(currShape != null && !Shape.isPlaceholderShape(currShape)) {
+                        sameDiff.putShapeForVarName(var.getVarName(),currShape);
+                        arr = var.storeAndAllocateNewArray();
+                    }
+
+                }
+
+                else
+                    arr = null;
+            }
+
+        }
+        else if(sameDiff.getArrForVarName(var.getVarName()) == null) {
+            if(var.getShape()  != null)
+                arr = var.storeAndAllocateNewArray();
+        }
+        else {
+            arr = var.getArr();
+        }
+
+        if(arr != null)
+            addOutputArgument(arr);
+
+        return arr;
     }
 
     /**
@@ -462,6 +488,16 @@ public class DynamicCustomOp extends DifferentialFunction implements CustomOp {
                 //clear just in case
                 val args = args();
                 inputArguments.clear();
+                for(val arg : args()) {
+                    //we should not attempt to resolve
+                    //outputs when null inputs exist
+                    if(arg.getArr() == null) {
+                        log.warn("No input found for " + arg.getVarName() + " and op name " + opName());
+                        return;
+                    }
+                }
+
+
                 for(val arg : args) {
                     inputArguments.add(arg.getArr());
                 }
@@ -668,6 +704,8 @@ public class DynamicCustomOp extends DifferentialFunction implements CustomOp {
 
                     sameDiff.putArrayForVarName(var.getVarName(),var.getWeightInitScheme().create(shape));
                 }
+
+
 
                 addInputArgument(var.getArr());
             }
