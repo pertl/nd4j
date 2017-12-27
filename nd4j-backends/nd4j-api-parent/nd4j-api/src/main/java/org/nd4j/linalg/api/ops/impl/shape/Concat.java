@@ -40,6 +40,12 @@ public class Concat extends DynamicCustomOp {
               concatDimension = var.getArr().getInt(0);
               addIArgument(concatDimension);
           }
+
+        //don't pass both iArg and last axis down to libnd4j
+        if(inputArguments().length == args().length) {
+            val inputArgs = inputArguments();
+            removeInputArgument(inputArgs[inputArguments().length - 1]);
+        }
     }
 
     @Override
@@ -83,6 +89,12 @@ public class Concat extends DynamicCustomOp {
             addIArgument(this.concatDimension);
             log.debug("Concat dimension: {}", concatDimension);
 
+        }
+
+        //don't pass both iArg and last axis down to libnd4j
+        if(inputArguments().length == nodeDef.getInputCount()) {
+            val inputArgs = inputArguments();
+            removeInputArgument(inputArgs[inputArguments().length - 1]);
         }
     }
 

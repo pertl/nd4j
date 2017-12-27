@@ -45,7 +45,8 @@ public class TFGraphTestList {
             //"mlp_00",
             //"mnist_00",
           //  "node_multiple_out",// -> Need to map multiple out values to graph node output values
-            "primitive_lstm",
+            //"primitive_lstm",
+            "ae",
             //"transform_0",
             //"transpose",
        //     "transpose_00"

@@ -154,6 +154,11 @@ public class Mmul extends DynamicCustomOp {
                 .build();
         this.mMulTranspose = mMulTranspose;
         val args = args();
+        for(val arg : args) {
+            if(sameDiff.isPlaceHolder(arg.getVarName()) || arg.getShape() == null) {
+                sameDiff.addPropertyToResolve(this,arg.getVarName());
+            }
+        }
     }
 
     @Override
