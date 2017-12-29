@@ -71,43 +71,6 @@ public class Transpose extends DynamicCustomOp {
         return "Transpose";
     }
 
-    @Override
-    public void initWithArrays(Map<String, INDArray> arrayMap, Object... extraArgs) {
-        if(permuteDims == null) {
-            val args = args();
-            if(args().length > 1) {
-                val permuteArrayOp = sameDiff.getArrForVarName(args[1].getVarName());
-                if(permuteArrayOp != null) {
-                    this.permuteDims = permuteArrayOp.data().asInt();
-                    if(ArrayUtil.prod(permuteDims) == 0 || permuteDims.length < args[0].getShape().length) {
-                        this.permuteDims = ArrayUtil.reverseCopy(ArrayUtil.range(0,args[0].getShape().length));
-                    }
-                    else {
-                        for(int i = 0; i < permuteDims.length; i++) {
-                            addIArgument(permuteDims[i]);
-                        }
-                    }
-
-                }
-                else
-                    this.permuteDims = ArrayUtil.reverseCopy(ArrayUtil.range(0,args[0].getShape().length));
-            }
-            else {
-                this.permuteDims = ArrayUtil.reverseCopy(ArrayUtil.range(0,args[0].getShape().length));
-            }
-
-        }
-
-        //only add if empty
-        if(numOutputArguments() == 0)
-            for(int i = 0; i < permuteDims.length; i++) {
-                addIArgument(permuteDims[i]);
-            }
-
-
-        if(permuteDims != null && permuteDims.length < arg().getShape().length)
-            throw new ND4JIllegalStateException("Illegal permute found. Not all dimensions specified");
-    }
 
     @Override
     public void initFromTensorFlow(NodeDef nodeDef, SameDiff initWith, Map<String, AttrValue> attributesForNode, GraphDef graph) {

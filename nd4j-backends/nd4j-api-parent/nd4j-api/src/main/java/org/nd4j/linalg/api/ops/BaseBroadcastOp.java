@@ -143,19 +143,6 @@ public abstract class BaseBroadcastOp extends BaseOp implements BroadcastOp {
         return dimension;
     }
 
-    @Override
-    public void initWithArrays(Map<String, INDArray> arrayMap, Object... extraArgs) {
-        super.initWithArrays(arrayMap);
-        if (args().length > 1 && larg() != null && rarg() != null && larg().getShape() != null && rarg().getShape() != null) {
-            if (Shape.isRowVectorShape(rarg().getShape())) {
-                this.dimension = new int[]{1};
-            } else if(Shape.isColumnVectorShape(rarg().getShape()))
-                this.dimension = new int[]{0};
-            else if (args().length > 1 && larg() != null && rarg() != null && larg().getShape() != null && rarg().getShape() != null && !sameDiff.isPlaceHolder(larg().getVarName()) && !sameDiff.isPlaceHolder(rarg().getVarName()))
-                this.dimension = Shape.getBroadcastDimensions(larg().getShape(), rarg().getShape());
-        }
-
-    }
 
     @Override
     public void setDimension(int... dimension) {

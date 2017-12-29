@@ -244,12 +244,6 @@ public abstract class BaseAccumulation extends BaseOp implements Accumulation {
         }
     }
 
-
-    @Override
-    public void initWithArrays(Map<String, INDArray> arrayMap, Object... extraArgs) {
-        super.initWithArrays(arrayMap);
-    }
-
     @Override
     public void setFinalResult(double value) {
         this.finalResult = value;

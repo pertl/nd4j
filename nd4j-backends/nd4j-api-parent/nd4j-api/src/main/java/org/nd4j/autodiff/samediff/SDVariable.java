@@ -127,11 +127,6 @@ public class SDVariable extends DifferentialFunction implements Serializable {
     }
 
 
-    @Override
-    public void initWithArrays(Map<String, INDArray> arrayMap, Object... extraArgs) {
-        //no-op
-    }
-
 
     /**
      * Allocate and return a  new array

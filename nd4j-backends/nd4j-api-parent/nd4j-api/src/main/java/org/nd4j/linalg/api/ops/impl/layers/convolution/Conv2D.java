@@ -12,7 +12,6 @@ import org.nd4j.imports.graphmapper.tf.TFGraphMapper;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.api.ops.DynamicCustomOp;
 import org.nd4j.linalg.api.ops.impl.layers.convolution.config.Conv2DConfig;
-import org.nd4j.linalg.exception.ND4JIllegalStateException;
 import org.nd4j.linalg.util.ArrayUtil;
 import org.tensorflow.framework.AttrValue;
 import org.tensorflow.framework.GraphDef;
@@ -62,38 +61,7 @@ public class Conv2D extends DynamicCustomOp {
 
     }
 
-    @Override
-    public void initWithArrays(Map<String, INDArray> arrayMap, Object... extraArgs) {
-        val var = sameDiff.getVariable(args()[1].getVarName());
-        //place holder variable
-        if (var.getArr() == null) {
-            //assuming the array hasn't been initialized, setup the config
-            //resolving the place holder variable.
-            INDArray array = arrayMap.get(var.getVarName());
-            if(array == null) {
-                throw new ND4JIllegalStateException("Array for variable " + var.getVarName() + " was null!");
-            }
-            array = (array.permute(3, 2, 0, 1).dup('c'));
-            sameDiff.updateVariable(var.getVarName(), array);
-            conv2DConfig.setKh(array.size(0));
-            conv2DConfig.setKw(array.size(1));
-        }
 
-
-
-        val inputs = args();
-        for(val func : inputs) {
-            INDArray arr = sameDiff.getArrForVarName(func.getVarName());
-            if(arr == null) {
-                val var2 = sameDiff.getVariable(func.getVarName());
-                arr = var2.storeAndAllocateNewArray();
-            }
-
-            addInputArgument(arr);
-        }
-
-
-    }
 
     @Override
     public void initFromTensorFlow(NodeDef nodeDef, SameDiff initWith, Map<String, AttrValue> attributesForNode, GraphDef graph) {
@@ -150,7 +118,8 @@ public class Conv2D extends DynamicCustomOp {
                 .sx(sX)
                 .sy(sY)
                 .isSameMode(isSameMode)
-                .isNCHW(dataFormat.equalsIgnoreCase("nchw"))
+                //c++ check checks for nchw
+                .isNCHW(!dataFormat.equalsIgnoreCase("nchw"))
                 .build();
         this.conv2DConfig = conv2DConfig;
 

@@ -185,41 +185,6 @@ public abstract class DifferentialFunction {
 
 
 
-    //by default no op, used for certain situations like
-    //place holder arrays
-    public void initOutputWithArrays(Map<String, INDArray> arrayMap, Object... extraArgs) {
-        if(isArrayInit() || isArrayInitialized()) {
-            return;
-        }
-
-        val shapeCalc = calculateOutputShape();
-        if(hasPlaceHolderInputs() && shapeCalc != null && !shapeCalc.isEmpty()) {
-            //update place holder shapes in case the shapes
-            // need to be resolved
-            //post adding the variables to the graph.
-            if(sameDiff.shapeAlreadyExistsForVarName(args()[0].getVarName()))
-                sameDiff.updateShapeForVarName(args()[0].getVarName(),shapeCalc.get(0));
-            else
-                sameDiff.putShapeForVarName(args()[0].getVarName(),shapeCalc.get(0));
-
-        }
-
-        this.arrayInitialized = true;
-    }
-
-    //by default no op, used for certain situations like
-    //place holder arrays
-    public void initWithArrays(Map<String, INDArray> arrayMap, Object... extraArgs) {
-        if(isArrayInit() || isArrayInitialized()) {
-            return;
-        }
-
-        for(val arg : args()) {
-            arg.initWithArrays(arrayMap,extraArgs);
-        }
-
-    }
-
 
 
     /**

@@ -26,9 +26,7 @@ import org.nd4j.autodiff.samediff.SDVariable;
 import org.nd4j.autodiff.samediff.SameDiff;
 import org.nd4j.imports.graphmapper.onnx.OnnxGraphMapper;
 import org.nd4j.imports.graphmapper.tf.TFGraphMapper;
-import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.api.ops.DynamicCustomOp;
-import org.nd4j.linalg.exception.ND4JIllegalStateException;
 import org.tensorflow.framework.AttrValue;
 import org.tensorflow.framework.GraphDef;
 import org.tensorflow.framework.NodeDef;
@@ -123,29 +121,7 @@ public class Reshape extends DynamicCustomOp {
 
     }
 
-    @Override
-    public void initWithArrays(Map<String, INDArray> arrayMap, Object... extraArgs) {
-        super.initWithArrays(arrayMap);
-        if(numIArguments() == 0) {
-            if(args().length > 1) {
-                val arr = sameDiff.getArrForVarName(args()[1].getVarName());
-                if(arr == null) {
-                    throw new ND4JIllegalStateException("Unable to infer shape for reshape. No array found for getting shape data from!");
-                }
 
-                this.shape = arr.data().asInt();
-                addIArgument('c');
-                addIArgument(this.shape);
-
-            }
-            else if(this.shape != null) {
-                addIArgument('c');
-                addIArgument(this.shape);
-            }
-            else
-                throw new ND4JIllegalStateException("Unable to map shape for reshape. No shape found!");
-        }
-    }
 
     @Override
     public void initFromOnnx(OnnxProto3.NodeProto node, SameDiff initWith, Map<String, OnnxProto3.AttributeProto> attributesForNode, OnnxProto3.GraphProto graph) {
