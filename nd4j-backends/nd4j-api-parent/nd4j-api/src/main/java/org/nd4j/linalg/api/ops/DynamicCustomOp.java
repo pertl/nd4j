@@ -442,17 +442,17 @@ public class DynamicCustomOp extends DifferentialFunction implements CustomOp {
             throw new NoOpNameFoundException("No descriptor found for op name " + opName());
 
 
-        if(descriptor.getNumInputs() > 0 && numInputArguments() != descriptor.getNumInputs())
+        if(descriptor.getNumInputs() > 0 && numInputArguments() < descriptor.getNumInputs())
             throw new ND4JIllegalStateException("Op failure for " + opName() + " Number of inputs is invalid for execution. Specified " + numInputArguments() + " but should be " + descriptor.getNumInputs());
 
-        if(descriptor.getNumOutputs() > 0 && numOutputArguments() != descriptor.getNumOutputs())
+        if(descriptor.getNumOutputs() > 0 && numOutputArguments() < descriptor.getNumOutputs())
             throw new ND4JIllegalStateException("Op failure for " + opName() + " Number of outputs is invalid for execution. Specified " + numOutputArguments() + " but should be " + descriptor.getNumInputs());
 
         //< 0 means dynamic size
-        if(descriptor.getNumIArgs() >= 0 && numIArguments() != descriptor.getNumIArgs())
+        if(descriptor.getNumIArgs() >= 0 && numIArguments() < descriptor.getNumIArgs())
             throw new ND4JIllegalStateException("Op failure for " + opName() + " Number of integer arguments is invalid for execution. Specified " + numIArguments() + " but should be " + descriptor.getNumIArgs());
 
-        if(descriptor.getNumTArgs() >= 0 && numTArguments() != descriptor.getNumTArgs())
+        if(descriptor.getNumTArgs() >= 0 && numTArguments() < descriptor.getNumTArgs())
             throw new ND4JIllegalStateException("Op failure for " + opName() + " Number of inputs is invalid for execution. Specified " + numTArguments() + " but should be " + descriptor.getNumTArgs());
 
     }
