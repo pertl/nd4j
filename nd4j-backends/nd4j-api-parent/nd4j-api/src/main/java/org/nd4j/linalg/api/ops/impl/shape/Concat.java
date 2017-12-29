@@ -5,6 +5,7 @@ import lombok.val;
 import onnx.OnnxProto3;
 import org.nd4j.autodiff.samediff.SameDiff;
 import org.nd4j.imports.NoOpNameFoundException;
+import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.api.ops.DynamicCustomOp;
 import org.nd4j.linalg.api.ops.Op;
 import org.nd4j.linalg.exception.ND4JIllegalStateException;
@@ -71,6 +72,11 @@ public class Concat extends DynamicCustomOp {
     }
 
     @Override
+    public void addInputArgument(INDArray... arg) {
+        super.addInputArgument(arg);
+    }
+
+    @Override
     public void initFromTensorFlow(NodeDef nodeDef, SameDiff initWith, Map<String, AttrValue> attributesForNode, GraphDef graph) {
         int concatDimension = -1;
         val input = nodeDef.getInput(nodeDef.getInputCount() - 1);
@@ -96,6 +102,8 @@ public class Concat extends DynamicCustomOp {
             val inputArgs = inputArguments();
             removeInputArgument(inputArgs[inputArguments().length - 1]);
         }
+
+        sameDiff.removeArgFromFunction(input,this);
     }
 
     @Override

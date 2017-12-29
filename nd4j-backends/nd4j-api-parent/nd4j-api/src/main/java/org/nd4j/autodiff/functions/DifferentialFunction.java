@@ -209,6 +209,10 @@ public abstract class DifferentialFunction {
         return false;
     }
 
+    /**
+     * Return the arguments for a given function
+     * @return the arguments for a given function
+     */
     public  SDVariable[] args() {
         return sameDiff.getInputVariablesForFunction(this);
     }

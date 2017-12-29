@@ -29,11 +29,12 @@ public class TFGraphTestList {
     public static String[] modelNames = new String[]{
 //            "add_n",
             //"ae_00",
-            "ae",
+            //"ae",
 //            "bias_add",
 //            "add_n",
 //            "bias_add",
-            "conv_0",
+           // "conv_0",
+           // "concat"
             //"deep_mnist", //NOTE THIS ONE WILL FAIL because it is expecting a placeholder value for dropout % which we tie to 1.0 in inference
             //"deep_mnist_no_dropout", //Takes way too long since there are a lot of nodes, would skip for now
            // "simple_cond"
@@ -47,6 +48,7 @@ public class TFGraphTestList {
             //"mnist_00",
           //  "node_multiple_out",// -> Need to map multiple out values to graph node output values
             //"primitive_lstm",
+            "stack"
             //"transform_0",
             //"transpose",
        //     "transpose_00"

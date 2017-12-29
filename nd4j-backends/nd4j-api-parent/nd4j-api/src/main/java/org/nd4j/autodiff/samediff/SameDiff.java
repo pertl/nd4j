@@ -1335,6 +1335,42 @@ public class SameDiff {
     }
 
 
+    /**
+     * Remove an argument for a function. Note that if this function
+     * does not contain the argument, it will just be a no op.
+     * @param varName the variable name to remove
+     * @param function the function to remove the argument from
+     */
+    public void removeArgFromFunction(String varName,DifferentialFunction function) {
+        val args = function.args();
+
+        for(int i = 0; i < args.length; i++) {
+            if(args[i].getVarName().equals(varName)) {
+                /**
+                 * Since we are removing the variable reference
+                 * from the arguments we need to  update both
+                 * the reverse and forward arguments.
+                 */
+                val reverseArgs = incomingArgsReverse.get(function.getOwnName());
+                incomingArgs.remove(reverseArgs);
+                incomingArgsReverse.remove(function.getOwnName());
+                val newArgs = new ArrayList<String>(args.length - 1);
+                for(int arg = 0; arg < args.length; arg++) {
+                    if(!reverseArgs[arg].equals(varName)) {
+                        newArgs.add(reverseArgs[arg]);
+                    }
+                }
+
+                val newArgsArr = newArgs.toArray(new String[newArgs.size()]);
+                incomingArgs.put(newArgsArr,function);
+                incomingArgsReverse.put(function.getOwnName(),newArgsArr);
+                //no further need to scan
+                break;
+            }
+        }
+
+
+    }
 
 
     /**
