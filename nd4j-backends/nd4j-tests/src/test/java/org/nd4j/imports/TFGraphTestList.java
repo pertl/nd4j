@@ -29,6 +29,7 @@ public class TFGraphTestList {
     public static String[] modelNames = new String[]{
 //            "add_n",
             //"ae_00",
+            "ae",
 //            "bias_add",
 //            "add_n",
 //            "bias_add",
@@ -46,7 +47,6 @@ public class TFGraphTestList {
             //"mnist_00",
           //  "node_multiple_out",// -> Need to map multiple out values to graph node output values
             //"primitive_lstm",
-            "ae",
             //"transform_0",
             //"transpose",
        //     "transpose_00"
