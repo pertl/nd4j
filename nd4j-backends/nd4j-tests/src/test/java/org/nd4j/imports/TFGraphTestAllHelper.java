@@ -6,6 +6,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.nd4j.autodiff.execution.NativeGraphExecutioner;
 import org.nd4j.autodiff.execution.conf.ExecutionMode;
 import org.nd4j.autodiff.execution.conf.ExecutorConfiguration;
 import org.nd4j.autodiff.execution.conf.OutputMode;
@@ -25,6 +26,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by susaneraly on 11/6/17.
@@ -134,11 +136,11 @@ public class TFGraphTestAllHelper {
 
             //val string = graph.asFlatPrint();
             //log.info("Graph structure: \n{}", string);
-            //val executioner = new NativeGraphExecutioner();
-            //val results = executioner.executeGraph(graph, configuration);
-            //assertTrue(results.length > 0); //FIXME: Later
+            val executioner = new NativeGraphExecutioner();
+            val results = executioner.executeGraph(graph, configuration);
+            assertTrue(results.length > 0); //FIXME: Later
 
-            graph.asFlatFile(new File("../../../libnd4j/tests_cpu/resources/conv_0.fb"));
+            //graph.asFlatFile(new File("../../../libnd4j/tests_cpu/resources/conv_0.fb"));
         } else if (executeWith.equals(ExecuteWith.JUST_PRINT)) {
             for (String input : inputs.keySet()) {
                 graph.associateArrayWithVariable(inputs.get(input), graph.variableMap().get(input));

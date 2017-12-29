@@ -57,7 +57,7 @@ public class Conv2D extends DynamicCustomOp {
                 conv2DConfig.getDh(),
                 conv2DConfig.getDw(),
                 ArrayUtil.fromBoolean(conv2DConfig.isSameMode()),
-                ArrayUtil.fromBoolean(conv2DConfig.isNCHW())});
+                ArrayUtil.fromBoolean(conv2DConfig.isNHWC())});
 
     }
 
@@ -97,17 +97,17 @@ public class Conv2D extends DynamicCustomOp {
 
 
         if (dataFormat.equalsIgnoreCase("nchw")) {
-            sY = tfStrides.get(1).intValue();
-            sX = tfStrides.get(2).intValue();
-
-            kY = arr.size(0);
-            kX = arr.size(1);
-        } else {
             sY = tfStrides.get(2).intValue();
             sX = tfStrides.get(3).intValue();
 
             kY = arr.size(2);
             kX = arr.size(3);
+        } else {
+            sY = tfStrides.get(1).intValue();
+            sX = tfStrides.get(2).intValue();
+
+            kY = arr.size(0);
+            kX = arr.size(1);
         }
 
 
@@ -119,7 +119,7 @@ public class Conv2D extends DynamicCustomOp {
                 .sy(sY)
                 .isSameMode(isSameMode)
                 //c++ check checks for nchw
-                .isNCHW(!dataFormat.equalsIgnoreCase("nchw"))
+                .isNHWC(dataFormat.equalsIgnoreCase("nhwc"))
                 .build();
         this.conv2DConfig = conv2DConfig;
 

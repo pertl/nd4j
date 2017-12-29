@@ -14,5 +14,5 @@ public class Conv2DConfig {
     @Builder.Default private int dh = 1;
     @Builder.Default private int dw = 1;
     private boolean isSameMode;
-    @Builder.Default private boolean isNCHW = false;
+    @Builder.Default private boolean isNHWC = false;
 }
