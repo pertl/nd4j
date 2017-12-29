@@ -58,7 +58,7 @@ public class Conv2D extends DynamicCustomOp {
                 conv2DConfig.getDh(),
                 conv2DConfig.getDw(),
                 ArrayUtil.fromBoolean(conv2DConfig.isSameMode()),
-                ArrayUtil.fromBoolean(conv2DConfig.isNHWC())});
+                ArrayUtil.fromBoolean(conv2DConfig.isNCHW())});
 
     }
 
@@ -112,17 +112,23 @@ public class Conv2D extends DynamicCustomOp {
         INDArray arr = sameDiff.getVariable(args[1].getVarName()).getArr();
         if(arr == null) {
             arr = TFGraphMapper.getInstance().getNDArrayFromTensor(nodeDef.getInput(0), nodeDef, graph);
+            // TODO: arguable. it might be easier to permute weights once
+            //arr = (arr.permute(3, 2, 0, 1).dup('c'));
+            val  varForOp = initWith.getVariable(args[1].getVarName());
+            if(arr != null)
+                initWith.associateArrayWithVariable(arr, varForOp);
+
+
         }
 
-        String data_format = "nhwc";
+        String dataFormat = "nhwc";
         if (nodeDef.containsAttr("data_format")) {
             val attr = nodeDef.getAttrOrThrow("data_format");
-
-            data_format = attr.getS().toStringUtf8().toLowerCase();
+            dataFormat = attr.getS().toStringUtf8().toLowerCase();
         }
 
 
-        if (data_format.equalsIgnoreCase("nhwc")) {
+        if (dataFormat.equalsIgnoreCase("nchw")) {
             sY = tfStrides.get(1).intValue();
             sX = tfStrides.get(2).intValue();
 
@@ -136,11 +142,6 @@ public class Conv2D extends DynamicCustomOp {
             kX = arr.size(3);
         }
 
-        // TODO: arguable. it might be easier to permute weights once
-        //arr = (arr.permute(3, 2, 0, 1).dup('c'));
-        val  varForOp = initWith.getVariable(args[1].getVarName());
-        initWith.associateArrayWithVariable(arr, varForOp);
-
 
         boolean isSameMode = paddingMode.equalsIgnoreCase("SAME");
         Conv2DConfig conv2DConfig = Conv2DConfig.builder()
@@ -149,13 +150,11 @@ public class Conv2D extends DynamicCustomOp {
                 .sx(sX)
                 .sy(sY)
                 .isSameMode(isSameMode)
-                .isNHWC(data_format.equalsIgnoreCase("nhwc"))
+                .isNCHW(dataFormat.equalsIgnoreCase("nchw"))
                 .build();
         this.conv2DConfig = conv2DConfig;
 
         addArgs();
-
-        addOutputArgument(arr);
 
 
     }

@@ -10,7 +10,6 @@ import org.nd4j.linalg.api.ops.Op;
 import org.nd4j.linalg.exception.ND4JIllegalStateException;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.util.ArrayUtil;
-import org.nd4j.shade.jackson.annotation.JsonIgnore;
 import org.nd4j.weightinit.WeightInitScheme;
 import org.nd4j.weightinit.impl.ZeroInitScheme;
 import org.tensorflow.framework.AttrValue;
@@ -44,10 +43,7 @@ public class SDVariable extends DifferentialFunction implements Serializable {
     @Getter
     @Setter
     protected WeightInitScheme weightInitScheme;
-    @Getter
-    @Setter
-    @JsonIgnore
-    protected int depth;
+
 
 
 

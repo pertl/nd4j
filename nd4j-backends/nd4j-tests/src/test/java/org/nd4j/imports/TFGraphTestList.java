@@ -28,11 +28,11 @@ public class TFGraphTestList {
 
     public static String[] modelNames = new String[]{
 //            "add_n",
-//            "ae_00",
+            //"ae_00",
 //            "bias_add",
 //            "add_n",
 //            "bias_add",
-            //"conv_0",
+            "conv_0",
             //"deep_mnist", //NOTE THIS ONE WILL FAIL because it is expecting a placeholder value for dropout % which we tie to 1.0 in inference
             //"deep_mnist_no_dropout", //Takes way too long since there are a lot of nodes, would skip for now
            // "simple_cond"
