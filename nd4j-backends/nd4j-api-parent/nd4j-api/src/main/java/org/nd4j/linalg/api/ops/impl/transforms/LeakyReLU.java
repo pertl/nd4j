@@ -43,16 +43,21 @@ public class LeakyReLU extends BaseTransformOp {
     public LeakyReLU(SameDiff sameDiff, SDVariable i_v, boolean inPlace, double alpha) {
         super(sameDiff, i_v, inPlace);
         this.alpha = alpha;
+        this.extraArgs = new Object[] {alpha};
+
     }
 
     public LeakyReLU(SameDiff sameDiff, SDVariable i_v, int[] shape, boolean inPlace, Object[] extraArgs, double alpha) {
         super(sameDiff, i_v, shape, inPlace, extraArgs);
         this.alpha = alpha;
+        this.extraArgs = new Object[] {alpha};
+
     }
 
     public LeakyReLU(SameDiff sameDiff, SDVariable i_v, Object[] extraArgs, double alpha) {
         super(sameDiff, i_v, extraArgs);
         this.alpha = alpha;
+        this.extraArgs = new Object[] {alpha};
     }
 
     public LeakyReLU() {
