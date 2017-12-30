@@ -1032,6 +1032,7 @@ public class SameDiffTests {
     public void testLogisticRegression() {
         Map<String,INDArray> vars = this.variablesForInput();
         SameDiff outside = SameDiff.create();
+
         outside.defineFunction("activate", new SameDiff.SameDiffFunctionDefinition() {
             @Override
             public SDVariable[] define(SameDiff sameDiff, Map<String, INDArray> inputs, SDVariable[] variableInputs) {
@@ -1067,6 +1068,9 @@ public class SameDiffTests {
          * matrix multiply
          *
          */
+
+        Nd4j.getExecutioner().enableDebugMode(true);
+        Nd4j.getExecutioner().enableVerboseMode(true);
 
 
         Pair<Map<SDVariable, DifferentialFunction>, List<DifferentialFunction>> opsBackward = outside.getFunction("activate").execBackwards();
@@ -1591,7 +1595,7 @@ public class SameDiffTests {
             INDArray inArr = Nd4j.linspace(-3, 3, 7);
             INDArray labelArr = Nd4j.linspace(-3, 3, 7).muli(0.5);
             SDVariable in = sd.var("in", inArr.dup());
-   
+
 //            System.out.println("inArr: " + inArr);
 
             INDArray outExp;
