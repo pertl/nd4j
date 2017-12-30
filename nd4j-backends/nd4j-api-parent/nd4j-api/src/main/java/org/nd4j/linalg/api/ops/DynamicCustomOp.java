@@ -177,6 +177,7 @@ public class DynamicCustomOp extends DifferentialFunction implements CustomOp {
                 //outputs are known from the descriptor
                 return new SDVariable[0];
             } else {
+                outputVariables = newVars;
                 return newVars;
             }
 

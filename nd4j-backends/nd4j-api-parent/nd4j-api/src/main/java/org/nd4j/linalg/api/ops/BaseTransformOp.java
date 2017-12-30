@@ -99,6 +99,14 @@ public abstract class BaseTransformOp extends BaseOp implements TransformOp {
             if(i_v1.getShape() != null)
                 this.n = ArrayUtil.prod(i_v1.getShape());
 
+            if(Shape.isPlaceholderShape(i_v1.getShape())) {
+                sameDiff.addPropertyToResolve(this,i_v1.getVarName());
+            }
+
+            if(Shape.isPlaceholderShape(i_v2.getShape())) {
+                sameDiff.addPropertyToResolve(this,i_v2.getVarName());
+            }
+
         } else {
             throw new IllegalArgumentException("Input not null variables.");
         }
@@ -126,6 +134,11 @@ public abstract class BaseTransformOp extends BaseOp implements TransformOp {
             if(i_v.getShape() != null) {
                 this.n = ArrayUtil.prod(i_v.getShape());
             }
+
+            if(Shape.isPlaceholderShape(i_v.getShape())) {
+                sameDiff.addPropertyToResolve(this,i_v.getVarName());
+            }
+
 
         } else {
             throw new IllegalArgumentException("Input must not null variable.");

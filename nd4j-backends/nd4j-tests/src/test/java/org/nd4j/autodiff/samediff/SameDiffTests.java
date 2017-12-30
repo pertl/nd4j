@@ -846,6 +846,43 @@ public class SameDiffTests {
         }
     }
 
+    @Test
+    public void testLabelInputPlaceHolderSgd() {
+
+        SameDiff sd = SameDiff.create();
+
+        int nIn = 3;
+        int nOut = 4;
+        int minibatch = 3;
+        SDVariable input = sd.var("in", new int[]{-1,nIn});
+        SDVariable label = sd.var("label", new int[]{-1, nOut});
+        assertTrue(input.isPlaceHolder());
+        assertTrue(label.isPlaceHolder());
+        SDVariable weights = sd.var("W", new int[]{nIn,nOut});
+        SDVariable bias = sd.var("b", new int[]{1,nOut});
+
+
+        SDVariable mmul = sd.mmul("mmul", input, weights);
+        SDVariable z = mmul.add("z", bias);
+        SDVariable out = sd.tanh(z);
+
+        SDVariable diff = out.sub(label);
+        SDVariable sqDiff = diff.mul(diff);
+        SDVariable msePerEx = sd.mean("msePerEx", sqDiff, 1);
+        SDVariable avgMSE = sd.mean("loss", msePerEx, 0);
+
+        INDArray inputArr = Nd4j.rand(minibatch, nIn);
+        INDArray labelArr = Nd4j.rand(minibatch, nOut);
+        INDArray weightsArr = Nd4j.rand(nIn, nOut);
+        INDArray biasArr = Nd4j.rand(1,nOut);
+
+        sd.associateArrayWithVariable(inputArr, input);
+        sd.associateArrayWithVariable(labelArr, label);
+        sd.associateArrayWithVariable(weightsArr, weights);
+        sd.associateArrayWithVariable(biasArr, bias);
+
+        INDArray result = sd.execAndEndResult();
+    }
 
 
     @Test

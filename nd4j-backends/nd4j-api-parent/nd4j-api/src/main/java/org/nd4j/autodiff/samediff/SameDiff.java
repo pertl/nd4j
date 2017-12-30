@@ -340,7 +340,8 @@ public class SameDiff {
                     function.getSameDiff());
             clone.setSameDiff(sameDiff);
             clone.setOwnName(function.getOwnName());
-            sameDiff.putFunctionForId(function.getOwnName(),function);
+            if(sameDiff.getFunctionById(function.getOwnName()) == null)
+                sameDiff.putFunctionForId(function.getOwnName(),function);
             newFunctions.put(function.getOwnName(),clone);
 
             val argsForFunction = function.args();
@@ -5565,6 +5566,9 @@ public class SameDiff {
                 continue;
 
             DifferentialFunction differentialFunction = funcs.get(i);
+            if(differentialFunction instanceof SDVariable) {
+                continue;
+            }
 
             if(differentialFunction instanceof If) {
                 If ifOp = (If) differentialFunction;
@@ -5664,11 +5668,13 @@ public class SameDiff {
 
 
             }
+
             else if(differentialFunction instanceof CustomOp) {
                 DynamicCustomOp customOp = (DynamicCustomOp) differentialFunction;
                 customOp.populateInputsAndOutputsFromSameDiff();
                 customOp.assertValidForExecution();
                 Nd4j.getExecutioner().exec(customOp);
+
                 ops.add(customOp);
             }
 
