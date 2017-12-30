@@ -41,6 +41,13 @@ public abstract class BaseBroadcastOp extends BaseOp implements BroadcastOp {
             this.sameDiff = sameDiff;
             this.inPlace = inPlace;
             this.dimension = dimension;
+            if(Shape.isPlaceholderShape(i_v1.getShape())) {
+                sameDiff.addPropertyToResolve(this,i_v1.getVarName());
+            }
+
+            if(Shape.isPlaceholderShape(i_v2.getShape())) {
+                sameDiff.addPropertyToResolve(this,i_v2.getVarName());
+            }
             sameDiff.addArgsFor(new SDVariable[]{i_v1,i_v2},this);
 
         } else {

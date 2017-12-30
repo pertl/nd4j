@@ -836,6 +836,7 @@ public class SameDiffTests {
             INDArray b = Nd4j.rand(bShape);
 
             sd.associateArrayWithVariable(in, sd.getVariable("in"));
+            assertNotNull(sd.getArrForVarName("in"));
             sd.associateArrayWithVariable(w, sd.getVariable("W"));
             sd.associateArrayWithVariable(b, sd.getVariable("b"));
 
@@ -846,6 +847,25 @@ public class SameDiffTests {
     }
 
 
+
+    @Test
+    public void testSequentialMeansPlaceholder() {
+        for( int dim0 : new int[]{10, -1}){
+            String msg = "Dimension 0 = " + dim0;
+            System.out.println(msg);
+            SameDiff sd = SameDiff.create();
+            SDVariable in = sd.var("in", new int[]{dim0, 9, 8});
+            SDVariable mean1 = sd.mean(in, 2);                  //[10,9,8] -> [10,9]
+            SDVariable mean2 = sd.mean(mean1, 1);               //[10,9] -> [10,1]
+
+            INDArray inArr = Nd4j.create(10, 9, 8);
+            sd.associateArrayWithVariable(inArr, in);
+
+            INDArray out = sd.execAndEndResult();     //Exception here, dim0=-1 case only
+
+            assertArrayEquals(msg, new int[]{10,1}, out.shape());
+        }
+    }
 
 
     @Test

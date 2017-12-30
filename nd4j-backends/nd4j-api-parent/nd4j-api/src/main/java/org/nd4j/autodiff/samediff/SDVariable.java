@@ -52,7 +52,8 @@ public class SDVariable extends DifferentialFunction implements Serializable {
                        SameDiff sameDiff,
                        int[] shape,
                        WeightInitScheme weightInitScheme) {
-          this.varName = varName;
+        super(sameDiff,new Object[]{});
+        this.varName = varName;
         this.weightInitScheme = weightInitScheme;
 
         if(weightInitScheme == null) {

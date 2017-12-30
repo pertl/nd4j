@@ -1,7 +1,6 @@
 package org.nd4j.linalg.api.ops;
 
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.nd4j.autodiff.samediff.SDVariable;
 import org.nd4j.autodiff.samediff.SameDiff;
 import org.nd4j.linalg.api.buffer.DataBuffer;
@@ -14,7 +13,6 @@ import org.nd4j.linalg.primitives.Pair;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Index based reduction algo
@@ -27,35 +25,43 @@ public abstract class BaseIndexAccumulation extends BaseOp implements IndexAccum
 
 
     public BaseIndexAccumulation(SameDiff sameDiff,
-                            SDVariable i_v,
-                            int[] dimensions) {
+                                 SDVariable i_v,
+                                 int[] dimensions) {
         super(sameDiff,new Object[]{dimensions});
         if (i_v != null) {
             this.dimensions = dimensions;
             f().validateDifferentialFunctionsameDiff(i_v);
-            val var2 = sameDiff.var(i_v.getVarName() + "-" + opName() + "-output-" + UUID.randomUUID().toString(),Shape.getReducedShape(i_v.getShape(),dimensions));
-            this.xVertexId = i_v.getVarName();
-            this.zVertexId = var2.getVarName();
+            sameDiff.addArgsFor(new SDVariable[]{i_v},this);
+            if(Shape.isPlaceholderShape(i_v.getShape())) {
+                sameDiff.addPropertyToResolve(this,i_v.getVarName());
+            }
 
+            this.xVertexId = i_v.getVarName();
         } else {
             throw new IllegalArgumentException("Input not null variable.");
         }
     }
 
     public BaseIndexAccumulation(SameDiff sameDiff,
-                            SDVariable i_v,
-                            SDVariable i_v2,
-                            int[] dimensions) {
+                                 SDVariable i_v,
+                                 SDVariable i_v2,
+                                 int[] dimensions) {
         super(sameDiff,new Object[]{dimensions});
         if (i_v != null) {
             this.dimensions = dimensions;
             f().validateDifferentialFunctionsameDiff(i_v);
             f().validateDifferentialFunctionsameDiff(i_v2);
-            val var2 = sameDiff.var(i_v.getVarName() + "-" + opName() + "-output-" + UUID.randomUUID().toString(),Shape.getReducedShape(i_v.getShape(),dimensions));
             this.xVertexId = i_v.getVarName();
-            this.zVertexId = var2.getVarName();
+            this.yVertexId = i_v2.getVarName();
+            sameDiff.addArgsFor(new SDVariable[]{i_v,i_v2},this);
 
+            if(Shape.isPlaceholderShape(i_v.getShape())) {
+                sameDiff.addPropertyToResolve(this,i_v.getVarName());
+            }
 
+            if(Shape.isPlaceholderShape(i_v2.getShape())) {
+                sameDiff.addPropertyToResolve(this,i_v2.getVarName());
+            }
         } else {
             throw new IllegalArgumentException("Input not null variable.");
         }

@@ -623,6 +623,11 @@ public class SameDiff {
     public void associateArrayWithVariable(INDArray arr, SDVariable variable) {
         reverseArrayLookup.put(arr,variable);
         variableNameToArr.put(variable.getVarName(),arr);
+        if(!shapeAlreadyExistsForVarName(variable.getVarName()))
+            putShapeForVarName(variable.getVarName(),arr.shape());
+        else {
+            updateShapeForVarName(variable.getVarName(),arr.shape());
+        }
     }
 
 
@@ -5385,6 +5390,9 @@ public class SameDiff {
 
         }
 
+
+
+
         for(val funcName : propertiesToResolve.keySet()) {
             val func = functionInstancesById.get(funcName);
             if(!functionInstancesById.containsKey(funcName)) {
@@ -5397,28 +5405,6 @@ public class SameDiff {
             }
 
         }
-
-        //extra init after we know aray shape
-     /*   for(val func : functionInstancesById.values()) {
-            func.initWithArrays(arrays);
-        }*/
-/*
-
-        //propagate variable names, sometimes shapes depend on  variables
-        //that have place holders
-        for(val func : placeHolderFunctions) {
-            getFunctionById(func).outputVariables();
-            val calcOutputShape = getFunctionById(func).calculateOutputShape();
-            val outputs = getOutputVariablesForFunction(getFunctionById(func));
-            for(int i = 0; i < calcOutputShape.size(); i++) {
-                if(getShapeForVarName(outputs[i].getVarName()) == null)
-                    putShapeForVarName(outputs[i].getVarName(),calcOutputShape.get(i));
-                if(getArrForVarName(outputs[i].getVarName()) == null)
-                    outputs[i].storeAndAllocateNewArray();
-            }
-        }
-*/
-
 
 
         //declare resolved
@@ -5698,6 +5684,7 @@ public class SameDiff {
                     int[] axes = differentialFunction.getDimensions();
                     if(differentialFunction instanceof Accumulation) {
                         Accumulation accumulation = (Accumulation) differentialFunction;
+
                         Nd4j.getExecutioner().exec(accumulation,axes);
 
                     }
@@ -5731,6 +5718,9 @@ public class SameDiff {
 
 
     public void printFunction(DifferentialFunction differentialFunction) {
+        if(differentialFunction instanceof SDVariable)
+            return;
+
         StringBuilder argShapes = new StringBuilder();
         for(val arg : differentialFunction.args()) {
             argShapes.append(" Variable " + arg.getVarName() +

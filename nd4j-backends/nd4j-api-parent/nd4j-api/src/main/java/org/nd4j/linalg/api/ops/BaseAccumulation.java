@@ -64,6 +64,9 @@ public abstract class BaseAccumulation extends BaseOp implements Accumulation {
             this.keepDims = keepDims;
             this.xVertexId = i_v.getVarName();
             sameDiff.addArgsFor(new String[]{xVertexId},this);
+            if(Shape.isPlaceholderShape(i_v.getShape())) {
+                sameDiff.addPropertyToResolve(this,i_v.getVarName());
+            }
 
         } else {
             throw new IllegalArgumentException("Input not null variable.");
