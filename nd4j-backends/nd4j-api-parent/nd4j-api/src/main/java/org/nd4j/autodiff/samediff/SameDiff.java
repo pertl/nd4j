@@ -370,6 +370,14 @@ public class SameDiff {
     }
 
 
+    /**
+     * Returns true if the given function id exists
+     * @param id the function id to test for
+     * @return true if the function id exists, false otherwise
+     */
+    public boolean functionExists(String id) {
+        return functionInstancesById.containsKey(id);
+    }
 
 
     /**
@@ -4070,1271 +4078,1271 @@ public class SameDiff {
      * for each array specified in the given map.
      * An {@link IllegalStateException} will be thrown
      * if not all arrays are
-Facebook
+     Facebook
 
-￼
-￼
-￼
-Search
-￼
-Adam
-Home
-Friend Requests
-Messages
-Notifications
-Account Settings
-￼
-Adam Gibson
-News Feed
-Messenger
-Shortcuts
-IQA(Image Processing QnA) : 영상처리 묻고 답하기
-20+
-Montreal.AI
-1
-Machine Learning Tokyo (study group)
-7
-Foreigners in Tokyo
-1
-Artificial Intelligence & Deep Learning Memes For Back-propagated Poets
-PnPJapan Batch Members
-IoT, Deep Learning, Smart Factory, Smart City (smartbean.org forum)
-Explore
-2
-Events
-Groups
-Pages
-Friend Lists
-4
-On This Day
-20+
-Pages Feed
-Manage Apps
-Photos
-Insights
-Games
-See More...
-Create
-Ad · Page · Group · Event
-Stories
-question-solid
-￼
-Raj
-￼
-Jacob
-￼
-Ivan
-￼
-Mary
-￼
-Ritesh
-￼
-Yohhei
-chevron-right
-￼
-2 event invites
-birthday
-Keigo Hattori's birthday is today
-English (US) · 日本語 · Español · Português (Brasil) · Français (France)
-Privacy · Terms · Advertising · Ad Choices · Cookies ·
-More
-Facebook © 2017
+     ￼
+     ￼
+     ￼
+     Search
+     ￼
+     Adam
+     Home
+     Friend Requests
+     Messages
+     Notifications
+     Account Settings
+     ￼
+     Adam Gibson
+     News Feed
+     Messenger
+     Shortcuts
+     IQA(Image Processing QnA) : 영상처리 묻고 답하기
+     20+
+     Montreal.AI
+     1
+     Machine Learning Tokyo (study group)
+     7
+     Foreigners in Tokyo
+     1
+     Artificial Intelligence & Deep Learning Memes For Back-propagated Poets
+     PnPJapan Batch Members
+     IoT, Deep Learning, Smart Factory, Smart City (smartbean.org forum)
+     Explore
+     2
+     Events
+     Groups
+     Pages
+     Friend Lists
+     4
+     On This Day
+     20+
+     Pages Feed
+     Manage Apps
+     Photos
+     Insights
+     Games
+     See More...
+     Create
+     Ad · Page · Group · Event
+     Stories
+     question-solid
+     ￼
+     Raj
+     ￼
+     Jacob
+     ￼
+     Ivan
+     ￼
+     Mary
+     ￼
+     Ritesh
+     ￼
+     Yohhei
+     chevron-right
+     ￼
+     2 event invites
+     birthday
+     Keigo Hattori's birthday is today
+     English (US) · 日本語 · Español · Português (Brasil) · Français (France)
+     Privacy · Terms · Advertising · Ad Choices · Cookies ·
+     More
+     Facebook © 2017
 
-Make PostPhoto/Video AlbumChoose a file to upload￼￼Choose FilesLive Video
-￼
-￼
-What's on your mind?
-Photo/Video￼￼Choose Files
-Feeling/Activity
-News Feed
-￼
-‎Suzana Ilić‎ to Machine Learning Tokyo (study group)
-1 hr · ￼
-Hi all! I just wanted to say that I'm very proud of our group, we started 6 months ago and had over 200 hours of Machine Learning study! お疲れ様でした！Now, the Lodge is closed for 2 weeks and it's a good time for us to take some time off as well! I will let you know when our first session in 2018 will kick off and until then: To a happy, healthy and unforgettable new year! ￼<3
-Like
-Show more reactions
-Comment
-Share
-5 Leung Tatsu, Билгээ Баяраа and 3 others
-Comments
-￼
-Hiromi Oyama
-Manage
-LikeShow more reactions · Reply · 54m
-￼
-Hiromi Oyama Happy holidays!
-Manage
-LikeShow more reactions · Reply · 53m
-￼
-￼
-Write a comment...
-￼￼Choose File
-Masato Uehara was tagged in a photo.
-￼
-Takafumi Matsudome is feeling thankful with Ryusuke Izumida and 3 others.
-16 mins · Minato-ku ·
-#BOP #WASSHA #ハッカソン #チームタロ
-3月のBOPハッカソンで出会ったメンバーで、忘年会できるって、嬉しい限り。
-また来年もまた集まってなんかするーーー！！
-See Translation
-￼
-Like
-Show more reactions
-Comment
-6 6
-Comments
-￼
-Satoshi Akita たのしそう！！
-Manage
-LikeShow more reactions · Reply · See Translation · 8m
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Yoonchul Shin shared 마링의 마음상담소's post.
-20 hrs · ￼
-다시합니다.
-See Translation
-￼
-마링의 마음상담소￼Like Page
-20 hrs · ￼
--일시: 2018.01.03~ 2018.01.17
--장소: 상수역 1번출구 코코갤러리
+     Make PostPhoto/Video AlbumChoose a file to upload￼￼Choose FilesLive Video
+     ￼
+     ￼
+     What's on your mind?
+     Photo/Video￼￼Choose Files
+     Feeling/Activity
+     News Feed
+     ￼
+     ‎Suzana Ilić‎ to Machine Learning Tokyo (study group)
+     1 hr · ￼
+     Hi all! I just wanted to say that I'm very proud of our group, we started 6 months ago and had over 200 hours of Machine Learning study! お疲れ様でした！Now, the Lodge is closed for 2 weeks and it's a good time for us to take some time off as well! I will let you know when our first session in 2018 will kick off and until then: To a happy, healthy and unforgettable new year! ￼<3
+     Like
+     Show more reactions
+     Comment
+     Share
+     5 Leung Tatsu, Билгээ Баяраа and 3 others
+     Comments
+     ￼
+     Hiromi Oyama
+     Manage
+     LikeShow more reactions · Reply · 54m
+     ￼
+     Hiromi Oyama Happy holidays!
+     Manage
+     LikeShow more reactions · Reply · 53m
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     Masato Uehara was tagged in a photo.
+     ￼
+     Takafumi Matsudome is feeling thankful with Ryusuke Izumida and 3 others.
+     16 mins · Minato-ku ·
+     #BOP #WASSHA #ハッカソン #チームタロ
+     3月のBOPハッカソンで出会ったメンバーで、忘年会できるって、嬉しい限り。
+     また来年もまた集まってなんかするーーー！！
+     See Translation
+     ￼
+     Like
+     Show more reactions
+     Comment
+     6 6
+     Comments
+     ￼
+     Satoshi Akita たのしそう！！
+     Manage
+     LikeShow more reactions · Reply · See Translation · 8m
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Yoonchul Shin shared 마링의 마음상담소's post.
+     20 hrs · ￼
+     다시합니다.
+     See Translation
+     ￼
+     마링의 마음상담소￼Like Page
+     20 hrs · ￼
+     -일시: 2018.01.03~ 2018.01.17
+     -장소: 상수역 1번출구 코코갤러리
 
-'마음은 볼 수 없습니다.'
-그래요 어떻게 보나요 눈을 씻고...
-See More
-See Translation
-Like
-Show more reactions
-Comment
-Share
-14 14
-Comments
-￼
-Jae Seok Kim 보러갈께유
-1
-Manage
-LikeShow more reactions · Reply · See Translation · 20h
-￼
-Yoonchul Shin replied · 1 Reply
-￼
-박성근 오 또 보러가야하는데...
-1
-Manage
-LikeShow more reactions · Reply · See Translation · 19h
-￼
-Yoonchul Shin replied · 1 Reply
-￼
-이지나 전시회 시간이 어떻게 돼요??
-1
-Manage
-LikeShow more reactions · Reply · See Translation · 19h
-￼
-Yoonchul Shin replied · 3 Replies
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Leung Tatsu
-16 hrs · ￼
-Already Put it into the list of hk trip from 2/10 to 2/19￼😎
-What a shame that haven visited Hidden agenda yet￼😝
-￼
-香港最老的爵士樂酒吧：不收入場費、親民貼地的La La Land - The News Lens 關鍵評論網
-爵士樂酒吧Ned Kelly Last Stand成立45週年，澳洲老闆Parker接受記者訪問，希望更多人了解他的「娛樂餐飲」意念，以及「Dixieland」這種爵士樂流派的妙處。
-HK.THENEWSLENS.COM
-Like
-Show more reactions
-Comment
-Share
-4 4
-Comments
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Alison B. Lowndes added 5 new photos.
-19 hrs · ￼
-The difference 24 hours & 8C make.
-￼
-￼
-￼
-￼
-￼
-Like
-Show more reactions
-Comment
-Share
-12 12
-Comments
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-太郎 スティーブン
-17 hrs ·
-CNN is the new Onion.
-￼
-Why kids love 'fascist' cartoons like 'Paw Patrol' and 'Thomas'
-Young children are drawn to worlds in which identities are fixed and transgressions are met with routine punishment.
-CNN.COM
-Like
-Show more reactions
-Comment
-Share
-1 1
-Comments
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Christian Moen
-20 hrs ·
-Shako
- · See original ·
-Rate this translation
-￼
-Like
-Show more reactions
-Comment
-15 15
-Comments
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Alison B. Lowndes is with Ben Lowndes and Robyn Lowndes.
-19 hrs · ￼
-Watching Mary Poppins #supercalafragalisticexpealidocious
-￼
-Like
-Show more reactions
-Comment
-Share
-11 11
-Comments
-￼
-Mikayla Phan Where’s mom’s costume??
-1
-Manage
-LikeShow more reactions · Reply · 19h
-￼
-Alexandra McIlwraith aww i want to be there, I know all the words too lol
-1
-Manage
-LikeShow more reactions · Reply · 9h
-￼
-Alison B. Lowndes replied · 1 Reply
-￼
-Mike Wake Too cold to go fly a kite?
-Manage
-LikeShow more reactions · Reply · 2h
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Yuta Okamoto
-18 hrs ·
-Twitter
- · ￼
-自分の目の前で、技術動向が１日単位で変化していく様子をが見られるのは非常にエキサイティングな経験ですね（キャッチアップできているとは言ってない。
-See Translation
-Like
-Show more reactions
-Comment
-Share
-8 8
-Comments
-￼
-大黒 寛仁 「俺たちは雰囲気で」云々
-1
-Manage
-LikeShow more reactions · Reply · See Translation · 15h
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Wei Chuan Chen added 2 new photos — with Ariel Marissa.
-5 hrs · Taito-ku ·
-Ariel is in Tokyo!!! ￼😍
-￼
-￼
-Like
-Show more reactions
-Comment
-40 40
-Comments
-￼
-Chris Michael Kelly Ok this is a VERY small world. I did a few musicals with her back home in New York lolol our hometowns are super close!
-1
-Manage
-LikeShow more reactions · Reply · 4h
-￼
-Wei Chuan Chen replied · 1 Reply
-￼
-Laura Floyd Sharp Hay Wei, we missed you at Christmas. Auntie La loves you and very proud of your accomplishments with school and work.
-Manage
-LikeShow more reactions · Reply · 4h
-￼
-Wei Chuan Chen replied · 1 Reply
-￼
-￼
-Write a comment...
-￼￼Choose File
-More Stories
-Chat with friends
-CONTACT PAGES
-SEE ALL
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-CONTACTS
-￼
-Ritvik Choudhary
-￼
-Eugene Huang
-￼
-Jana Thompson
-￼
-Yoovraj Shinde
-￼
-1h
-Shawn YS Tan
-￼
-6h
-Chris Nicholson
-￼
-1m
-Suzana Ilić
-￼
-HongJoon Kim
-￼
-Erin Akinci
-￼
-Ahyoung Park
-￼
-Tan Zu Puayen
-￼
-Zain Abiddin
-￼
-Lev Sixteenletters
-￼
-Anthony Seungwook Paek
-￼
-Lee SangHoon
-NEARBY
-￼
-3h
-Takeshi Izaki
-永田町
-MORE CONTACTS (21)
-￼
-Alexander Strunkin
-￼
-Angela Tyson
-￼
-Charles Muguru
-￼
-Cho Sung Kwang
-￼
-Ivan Novikov
-￼
-Jeongyeol Choe
-￼
-Johnathan Davis
-￼
-Jonny Lee
-￼
-Kabjin Kwon
-￼
-Leah Zinn
-￼
-Li Xia
-￼
-Mohit Agrawal
-￼
-Parthojit Chakraborty
-￼
-Robert Haidari
-￼
-Shuntaro Tamura
-￼
-Vicente Vial
-Facebook
+     '마음은 볼 수 없습니다.'
+     그래요 어떻게 보나요 눈을 씻고...
+     See More
+     See Translation
+     Like
+     Show more reactions
+     Comment
+     Share
+     14 14
+     Comments
+     ￼
+     Jae Seok Kim 보러갈께유
+     1
+     Manage
+     LikeShow more reactions · Reply · See Translation · 20h
+     ￼
+     Yoonchul Shin replied · 1 Reply
+     ￼
+     박성근 오 또 보러가야하는데...
+     1
+     Manage
+     LikeShow more reactions · Reply · See Translation · 19h
+     ￼
+     Yoonchul Shin replied · 1 Reply
+     ￼
+     이지나 전시회 시간이 어떻게 돼요??
+     1
+     Manage
+     LikeShow more reactions · Reply · See Translation · 19h
+     ￼
+     Yoonchul Shin replied · 3 Replies
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Leung Tatsu
+     16 hrs · ￼
+     Already Put it into the list of hk trip from 2/10 to 2/19￼😎
+     What a shame that haven visited Hidden agenda yet￼😝
+     ￼
+     香港最老的爵士樂酒吧：不收入場費、親民貼地的La La Land - The News Lens 關鍵評論網
+     爵士樂酒吧Ned Kelly Last Stand成立45週年，澳洲老闆Parker接受記者訪問，希望更多人了解他的「娛樂餐飲」意念，以及「Dixieland」這種爵士樂流派的妙處。
+     HK.THENEWSLENS.COM
+     Like
+     Show more reactions
+     Comment
+     Share
+     4 4
+     Comments
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Alison B. Lowndes added 5 new photos.
+     19 hrs · ￼
+     The difference 24 hours & 8C make.
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     Like
+     Show more reactions
+     Comment
+     Share
+     12 12
+     Comments
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     太郎 スティーブン
+     17 hrs ·
+     CNN is the new Onion.
+     ￼
+     Why kids love 'fascist' cartoons like 'Paw Patrol' and 'Thomas'
+     Young children are drawn to worlds in which identities are fixed and transgressions are met with routine punishment.
+     CNN.COM
+     Like
+     Show more reactions
+     Comment
+     Share
+     1 1
+     Comments
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Christian Moen
+     20 hrs ·
+     Shako
+     · See original ·
+     Rate this translation
+     ￼
+     Like
+     Show more reactions
+     Comment
+     15 15
+     Comments
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Alison B. Lowndes is with Ben Lowndes and Robyn Lowndes.
+     19 hrs · ￼
+     Watching Mary Poppins #supercalafragalisticexpealidocious
+     ￼
+     Like
+     Show more reactions
+     Comment
+     Share
+     11 11
+     Comments
+     ￼
+     Mikayla Phan Where’s mom’s costume??
+     1
+     Manage
+     LikeShow more reactions · Reply · 19h
+     ￼
+     Alexandra McIlwraith aww i want to be there, I know all the words too lol
+     1
+     Manage
+     LikeShow more reactions · Reply · 9h
+     ￼
+     Alison B. Lowndes replied · 1 Reply
+     ￼
+     Mike Wake Too cold to go fly a kite?
+     Manage
+     LikeShow more reactions · Reply · 2h
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Yuta Okamoto
+     18 hrs ·
+     Twitter
+     · ￼
+     自分の目の前で、技術動向が１日単位で変化していく様子をが見られるのは非常にエキサイティングな経験ですね（キャッチアップできているとは言ってない。
+     See Translation
+     Like
+     Show more reactions
+     Comment
+     Share
+     8 8
+     Comments
+     ￼
+     大黒 寛仁 「俺たちは雰囲気で」云々
+     1
+     Manage
+     LikeShow more reactions · Reply · See Translation · 15h
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Wei Chuan Chen added 2 new photos — with Ariel Marissa.
+     5 hrs · Taito-ku ·
+     Ariel is in Tokyo!!! ￼😍
+     ￼
+     ￼
+     Like
+     Show more reactions
+     Comment
+     40 40
+     Comments
+     ￼
+     Chris Michael Kelly Ok this is a VERY small world. I did a few musicals with her back home in New York lolol our hometowns are super close!
+     1
+     Manage
+     LikeShow more reactions · Reply · 4h
+     ￼
+     Wei Chuan Chen replied · 1 Reply
+     ￼
+     Laura Floyd Sharp Hay Wei, we missed you at Christmas. Auntie La loves you and very proud of your accomplishments with school and work.
+     Manage
+     LikeShow more reactions · Reply · 4h
+     ￼
+     Wei Chuan Chen replied · 1 Reply
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     More Stories
+     Chat with friends
+     CONTACT PAGES
+     SEE ALL
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     CONTACTS
+     ￼
+     Ritvik Choudhary
+     ￼
+     Eugene Huang
+     ￼
+     Jana Thompson
+     ￼
+     Yoovraj Shinde
+     ￼
+     1h
+     Shawn YS Tan
+     ￼
+     6h
+     Chris Nicholson
+     ￼
+     1m
+     Suzana Ilić
+     ￼
+     HongJoon Kim
+     ￼
+     Erin Akinci
+     ￼
+     Ahyoung Park
+     ￼
+     Tan Zu Puayen
+     ￼
+     Zain Abiddin
+     ￼
+     Lev Sixteenletters
+     ￼
+     Anthony Seungwook Paek
+     ￼
+     Lee SangHoon
+     NEARBY
+     ￼
+     3h
+     Takeshi Izaki
+     永田町
+     MORE CONTACTS (21)
+     ￼
+     Alexander Strunkin
+     ￼
+     Angela Tyson
+     ￼
+     Charles Muguru
+     ￼
+     Cho Sung Kwang
+     ￼
+     Ivan Novikov
+     ￼
+     Jeongyeol Choe
+     ￼
+     Johnathan Davis
+     ￼
+     Jonny Lee
+     ￼
+     Kabjin Kwon
+     ￼
+     Leah Zinn
+     ￼
+     Li Xia
+     ￼
+     Mohit Agrawal
+     ￼
+     Parthojit Chakraborty
+     ￼
+     Robert Haidari
+     ￼
+     Shuntaro Tamura
+     ￼
+     Vicente Vial
+     Facebook
 
-￼
-￼
-￼
-Search
-￼
-Adam
-Home
-Friend Requests
-Messages
-Notifications
-Account Settings
-￼
-Adam Gibson
-News Feed
-Messenger
-Shortcuts
-IQA(Image Processing QnA) : 영상처리 묻고 답하기
-20+
-Montreal.AI
-1
-Machine Learning Tokyo (study group)
-7
-Foreigners in Tokyo
-1
-Artificial Intelligence & Deep Learning Memes For Back-propagated Poets
-PnPJapan Batch Members
-IoT, Deep Learning, Smart Factory, Smart City (smartbean.org forum)
-Explore
-2
-Events
-Groups
-Pages
-Friend Lists
-4
-On This Day
-20+
-Pages Feed
-Manage Apps
-Photos
-Insights
-Games
-See More...
-Create
-Ad · Page · Group · Event
-Stories
-question-solid
-￼
-Raj
-￼
-Jacob
-￼
-Ivan
-￼
-Mary
-￼
-Ritesh
-￼
-Yohhei
-chevron-right
-￼
-2 event invites
-birthday
-Keigo Hattori's birthday is today
-English (US) · 日本語 · Español · Português (Brasil) · Français (France)
-Privacy · Terms · Advertising · Ad Choices · Cookies ·
-More
-Facebook © 2017
+     ￼
+     ￼
+     ￼
+     Search
+     ￼
+     Adam
+     Home
+     Friend Requests
+     Messages
+     Notifications
+     Account Settings
+     ￼
+     Adam Gibson
+     News Feed
+     Messenger
+     Shortcuts
+     IQA(Image Processing QnA) : 영상처리 묻고 답하기
+     20+
+     Montreal.AI
+     1
+     Machine Learning Tokyo (study group)
+     7
+     Foreigners in Tokyo
+     1
+     Artificial Intelligence & Deep Learning Memes For Back-propagated Poets
+     PnPJapan Batch Members
+     IoT, Deep Learning, Smart Factory, Smart City (smartbean.org forum)
+     Explore
+     2
+     Events
+     Groups
+     Pages
+     Friend Lists
+     4
+     On This Day
+     20+
+     Pages Feed
+     Manage Apps
+     Photos
+     Insights
+     Games
+     See More...
+     Create
+     Ad · Page · Group · Event
+     Stories
+     question-solid
+     ￼
+     Raj
+     ￼
+     Jacob
+     ￼
+     Ivan
+     ￼
+     Mary
+     ￼
+     Ritesh
+     ￼
+     Yohhei
+     chevron-right
+     ￼
+     2 event invites
+     birthday
+     Keigo Hattori's birthday is today
+     English (US) · 日本語 · Español · Português (Brasil) · Français (France)
+     Privacy · Terms · Advertising · Ad Choices · Cookies ·
+     More
+     Facebook © 2017
 
-Make PostPhoto/Video AlbumChoose a file to upload￼￼Choose FilesLive Video
-￼
-￼
-What's on your mind?
-Photo/Video￼￼Choose Files
-Feeling/Activity
-News Feed
-￼
-‎Suzana Ilić‎ to Machine Learning Tokyo (study group)
-1 hr · ￼
-Hi all! I just wanted to say that I'm very proud of our group, we started 6 months ago and had over 200 hours of Machine Learning study! お疲れ様でした！Now, the Lodge is closed for 2 weeks and it's a good time for us to take some time off as well! I will let you know when our first session in 2018 will kick off and until then: To a happy, healthy and unforgettable new year! ￼<3
-Like
-Show more reactions
-Comment
-Share
-5 Leung Tatsu, Билгээ Баяраа and 3 others
-Comments
-￼
-Hiromi Oyama
-Manage
-LikeShow more reactions · Reply · 54m
-￼
-Hiromi Oyama Happy holidays!
-Manage
-LikeShow more reactions · Reply · 53m
-￼
-￼
-Write a comment...
-￼￼Choose File
-Masato Uehara was tagged in a photo.
-￼
-Takafumi Matsudome is feeling thankful with Ryusuke Izumida and 3 others.
-16 mins · Minato-ku ·
-#BOP #WASSHA #ハッカソン #チームタロ
-3月のBOPハッカソンで出会ったメンバーで、忘年会できるって、嬉しい限り。
-また来年もまた集まってなんかするーーー！！
-See Translation
-￼
-Like
-Show more reactions
-Comment
-6 6
-Comments
-￼
-Satoshi Akita たのしそう！！
-Manage
-LikeShow more reactions · Reply · See Translation · 8m
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Yoonchul Shin shared 마링의 마음상담소's post.
-20 hrs · ￼
-다시합니다.
-See Translation
-￼
-마링의 마음상담소￼Like Page
-20 hrs · ￼
--일시: 2018.01.03~ 2018.01.17
--장소: 상수역 1번출구 코코갤러리
+     Make PostPhoto/Video AlbumChoose a file to upload￼￼Choose FilesLive Video
+     ￼
+     ￼
+     What's on your mind?
+     Photo/Video￼￼Choose Files
+     Feeling/Activity
+     News Feed
+     ￼
+     ‎Suzana Ilić‎ to Machine Learning Tokyo (study group)
+     1 hr · ￼
+     Hi all! I just wanted to say that I'm very proud of our group, we started 6 months ago and had over 200 hours of Machine Learning study! お疲れ様でした！Now, the Lodge is closed for 2 weeks and it's a good time for us to take some time off as well! I will let you know when our first session in 2018 will kick off and until then: To a happy, healthy and unforgettable new year! ￼<3
+     Like
+     Show more reactions
+     Comment
+     Share
+     5 Leung Tatsu, Билгээ Баяраа and 3 others
+     Comments
+     ￼
+     Hiromi Oyama
+     Manage
+     LikeShow more reactions · Reply · 54m
+     ￼
+     Hiromi Oyama Happy holidays!
+     Manage
+     LikeShow more reactions · Reply · 53m
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     Masato Uehara was tagged in a photo.
+     ￼
+     Takafumi Matsudome is feeling thankful with Ryusuke Izumida and 3 others.
+     16 mins · Minato-ku ·
+     #BOP #WASSHA #ハッカソン #チームタロ
+     3月のBOPハッカソンで出会ったメンバーで、忘年会できるって、嬉しい限り。
+     また来年もまた集まってなんかするーーー！！
+     See Translation
+     ￼
+     Like
+     Show more reactions
+     Comment
+     6 6
+     Comments
+     ￼
+     Satoshi Akita たのしそう！！
+     Manage
+     LikeShow more reactions · Reply · See Translation · 8m
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Yoonchul Shin shared 마링의 마음상담소's post.
+     20 hrs · ￼
+     다시합니다.
+     See Translation
+     ￼
+     마링의 마음상담소￼Like Page
+     20 hrs · ￼
+     -일시: 2018.01.03~ 2018.01.17
+     -장소: 상수역 1번출구 코코갤러리
 
-'마음은 볼 수 없습니다.'
-그래요 어떻게 보나요 눈을 씻고...
-See More
-See Translation
-Like
-Show more reactions
-Comment
-Share
-14 14
-Comments
-￼
-Jae Seok Kim 보러갈께유
-1
-Manage
-LikeShow more reactions · Reply · See Translation · 20h
-￼
-Yoonchul Shin replied · 1 Reply
-￼
-박성근 오 또 보러가야하는데...
-1
-Manage
-LikeShow more reactions · Reply · See Translation · 19h
-￼
-Yoonchul Shin replied · 1 Reply
-￼
-이지나 전시회 시간이 어떻게 돼요??
-1
-Manage
-LikeShow more reactions · Reply · See Translation · 19h
-￼
-Yoonchul Shin replied · 3 Replies
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Leung Tatsu
-16 hrs · ￼
-Already Put it into the list of hk trip from 2/10 to 2/19￼😎
-What a shame that haven visited Hidden agenda yet￼😝
-￼
-香港最老的爵士樂酒吧：不收入場費、親民貼地的La La Land - The News Lens 關鍵評論網
-爵士樂酒吧Ned Kelly Last Stand成立45週年，澳洲老闆Parker接受記者訪問，希望更多人了解他的「娛樂餐飲」意念，以及「Dixieland」這種爵士樂流派的妙處。
-HK.THENEWSLENS.COM
-Like
-Show more reactions
-Comment
-Share
-4 4
-Comments
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Alison B. Lowndes added 5 new photos.
-19 hrs · ￼
-The difference 24 hours & 8C make.
-￼
-￼
-￼
-￼
-￼
-Like
-Show more reactions
-Comment
-Share
-12 12
-Comments
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-太郎 スティーブン
-17 hrs ·
-CNN is the new Onion.
-￼
-Why kids love 'fascist' cartoons like 'Paw Patrol' and 'Thomas'
-Young children are drawn to worlds in which identities are fixed and transgressions are met with routine punishment.
-CNN.COM
-Like
-Show more reactions
-Comment
-Share
-1 1
-Comments
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Christian Moen
-20 hrs ·
-Shako
- · See original ·
-Rate this translation
-￼
-Like
-Show more reactions
-Comment
-15 15
-Comments
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Alison B. Lowndes is with Ben Lowndes and Robyn Lowndes.
-19 hrs · ￼
-Watching Mary Poppins #supercalafragalisticexpealidocious
-￼
-Like
-Show more reactions
-Comment
-Share
-11 11
-Comments
-￼
-Mikayla Phan Where’s mom’s costume??
-1
-Manage
-LikeShow more reactions · Reply · 19h
-￼
-Alexandra McIlwraith aww i want to be there, I know all the words too lol
-1
-Manage
-LikeShow more reactions · Reply · 9h
-￼
-Alison B. Lowndes replied · 1 Reply
-￼
-Mike Wake Too cold to go fly a kite?
-Manage
-LikeShow more reactions · Reply · 2h
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Yuta Okamoto
-18 hrs ·
-Twitter
- · ￼
-自分の目の前で、技術動向が１日単位で変化していく様子をが見られるのは非常にエキサイティングな経験ですね（キャッチアップできているとは言ってない。
-See Translation
-Like
-Show more reactions
-Comment
-Share
-8 8
-Comments
-￼
-大黒 寛仁 「俺たちは雰囲気で」云々
-1
-Manage
-LikeShow more reactions · Reply · See Translation · 15h
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Wei Chuan Chen added 2 new photos — with Ariel Marissa.
-5 hrs · Taito-ku ·
-Ariel is in Tokyo!!! ￼😍
-￼
-￼
-Like
-Show more reactions
-Comment
-40 40
-Comments
-￼
-Chris Michael Kelly Ok this is a VERY small world. I did a few musicals with her back home in New York lolol our hometowns are super close!
-1
-Manage
-LikeShow more reactions · Reply · 4h
-￼
-Wei Chuan Chen replied · 1 Reply
-￼
-Laura Floyd Sharp Hay Wei, we missed you at Christmas. Auntie La loves you and very proud of your accomplishments with school and work.
-Manage
-LikeShow more reactions · Reply · 4h
-￼
-Wei Chuan Chen replied · 1 Reply
-￼
-￼
-Write a comment...
-￼￼Choose File
-More Stories
-Chat with friends
-CONTACT PAGES
-SEE ALL
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-CONTACTS
-￼
-Ritvik Choudhary
-￼
-Eugene Huang
-￼
-Jana Thompson
-￼
-Yoovraj Shinde
-￼
-1h
-Shawn YS Tan
-￼
-6h
-Chris Nicholson
-￼
-1m
-Suzana Ilić
-￼
-HongJoon Kim
-￼
-Erin Akinci
-￼
-Ahyoung Park
-￼
-Tan Zu Puayen
-￼
-Zain Abiddin
-￼
-Lev Sixteenletters
-￼
-Anthony Seungwook Paek
-￼
-Lee SangHoon
-NEARBY
-￼
-3h
-Takeshi Izaki
-永田町
-MORE CONTACTS (21)
-￼
-Alexander Strunkin
-￼
-Angela Tyson
-￼
-Charles Muguru
-￼
-Cho Sung Kwang
-￼
-Ivan Novikov
-￼
-Jeongyeol Choe
-￼
-Johnathan Davis
-￼
-Jonny Lee
-￼
-Kabjin Kwon
-￼
-Leah Zinn
-￼
-Li Xia
-￼
-Mohit Agrawal
-￼
-Parthojit Chakraborty
-￼
-Robert Haidari
-￼
-Shuntaro Tamura
-￼
-Vicente Vial
-￼
-Facebook
+     '마음은 볼 수 없습니다.'
+     그래요 어떻게 보나요 눈을 씻고...
+     See More
+     See Translation
+     Like
+     Show more reactions
+     Comment
+     Share
+     14 14
+     Comments
+     ￼
+     Jae Seok Kim 보러갈께유
+     1
+     Manage
+     LikeShow more reactions · Reply · See Translation · 20h
+     ￼
+     Yoonchul Shin replied · 1 Reply
+     ￼
+     박성근 오 또 보러가야하는데...
+     1
+     Manage
+     LikeShow more reactions · Reply · See Translation · 19h
+     ￼
+     Yoonchul Shin replied · 1 Reply
+     ￼
+     이지나 전시회 시간이 어떻게 돼요??
+     1
+     Manage
+     LikeShow more reactions · Reply · See Translation · 19h
+     ￼
+     Yoonchul Shin replied · 3 Replies
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Leung Tatsu
+     16 hrs · ￼
+     Already Put it into the list of hk trip from 2/10 to 2/19￼😎
+     What a shame that haven visited Hidden agenda yet￼😝
+     ￼
+     香港最老的爵士樂酒吧：不收入場費、親民貼地的La La Land - The News Lens 關鍵評論網
+     爵士樂酒吧Ned Kelly Last Stand成立45週年，澳洲老闆Parker接受記者訪問，希望更多人了解他的「娛樂餐飲」意念，以及「Dixieland」這種爵士樂流派的妙處。
+     HK.THENEWSLENS.COM
+     Like
+     Show more reactions
+     Comment
+     Share
+     4 4
+     Comments
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Alison B. Lowndes added 5 new photos.
+     19 hrs · ￼
+     The difference 24 hours & 8C make.
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     Like
+     Show more reactions
+     Comment
+     Share
+     12 12
+     Comments
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     太郎 スティーブン
+     17 hrs ·
+     CNN is the new Onion.
+     ￼
+     Why kids love 'fascist' cartoons like 'Paw Patrol' and 'Thomas'
+     Young children are drawn to worlds in which identities are fixed and transgressions are met with routine punishment.
+     CNN.COM
+     Like
+     Show more reactions
+     Comment
+     Share
+     1 1
+     Comments
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Christian Moen
+     20 hrs ·
+     Shako
+     · See original ·
+     Rate this translation
+     ￼
+     Like
+     Show more reactions
+     Comment
+     15 15
+     Comments
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Alison B. Lowndes is with Ben Lowndes and Robyn Lowndes.
+     19 hrs · ￼
+     Watching Mary Poppins #supercalafragalisticexpealidocious
+     ￼
+     Like
+     Show more reactions
+     Comment
+     Share
+     11 11
+     Comments
+     ￼
+     Mikayla Phan Where’s mom’s costume??
+     1
+     Manage
+     LikeShow more reactions · Reply · 19h
+     ￼
+     Alexandra McIlwraith aww i want to be there, I know all the words too lol
+     1
+     Manage
+     LikeShow more reactions · Reply · 9h
+     ￼
+     Alison B. Lowndes replied · 1 Reply
+     ￼
+     Mike Wake Too cold to go fly a kite?
+     Manage
+     LikeShow more reactions · Reply · 2h
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Yuta Okamoto
+     18 hrs ·
+     Twitter
+     · ￼
+     自分の目の前で、技術動向が１日単位で変化していく様子をが見られるのは非常にエキサイティングな経験ですね（キャッチアップできているとは言ってない。
+     See Translation
+     Like
+     Show more reactions
+     Comment
+     Share
+     8 8
+     Comments
+     ￼
+     大黒 寛仁 「俺たちは雰囲気で」云々
+     1
+     Manage
+     LikeShow more reactions · Reply · See Translation · 15h
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Wei Chuan Chen added 2 new photos — with Ariel Marissa.
+     5 hrs · Taito-ku ·
+     Ariel is in Tokyo!!! ￼😍
+     ￼
+     ￼
+     Like
+     Show more reactions
+     Comment
+     40 40
+     Comments
+     ￼
+     Chris Michael Kelly Ok this is a VERY small world. I did a few musicals with her back home in New York lolol our hometowns are super close!
+     1
+     Manage
+     LikeShow more reactions · Reply · 4h
+     ￼
+     Wei Chuan Chen replied · 1 Reply
+     ￼
+     Laura Floyd Sharp Hay Wei, we missed you at Christmas. Auntie La loves you and very proud of your accomplishments with school and work.
+     Manage
+     LikeShow more reactions · Reply · 4h
+     ￼
+     Wei Chuan Chen replied · 1 Reply
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     More Stories
+     Chat with friends
+     CONTACT PAGES
+     SEE ALL
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     CONTACTS
+     ￼
+     Ritvik Choudhary
+     ￼
+     Eugene Huang
+     ￼
+     Jana Thompson
+     ￼
+     Yoovraj Shinde
+     ￼
+     1h
+     Shawn YS Tan
+     ￼
+     6h
+     Chris Nicholson
+     ￼
+     1m
+     Suzana Ilić
+     ￼
+     HongJoon Kim
+     ￼
+     Erin Akinci
+     ￼
+     Ahyoung Park
+     ￼
+     Tan Zu Puayen
+     ￼
+     Zain Abiddin
+     ￼
+     Lev Sixteenletters
+     ￼
+     Anthony Seungwook Paek
+     ￼
+     Lee SangHoon
+     NEARBY
+     ￼
+     3h
+     Takeshi Izaki
+     永田町
+     MORE CONTACTS (21)
+     ￼
+     Alexander Strunkin
+     ￼
+     Angela Tyson
+     ￼
+     Charles Muguru
+     ￼
+     Cho Sung Kwang
+     ￼
+     Ivan Novikov
+     ￼
+     Jeongyeol Choe
+     ￼
+     Johnathan Davis
+     ￼
+     Jonny Lee
+     ￼
+     Kabjin Kwon
+     ￼
+     Leah Zinn
+     ￼
+     Li Xia
+     ￼
+     Mohit Agrawal
+     ￼
+     Parthojit Chakraborty
+     ￼
+     Robert Haidari
+     ￼
+     Shuntaro Tamura
+     ￼
+     Vicente Vial
+     ￼
+     Facebook
 
-￼
-￼
-￼
-Search
-￼
-Adam
-Home
-Friend Requests
-Messages
-Notifications
-Account Settings
-￼
-Adam Gibson
-News Feed
-Messenger
-Shortcuts
-IQA(Image Processing QnA) : 영상처리 묻고 답하기
-20+
-Montreal.AI
-1
-Machine Learning Tokyo (study group)
-7
-Foreigners in Tokyo
-1
-Artificial Intelligence & Deep Learning Memes For Back-propagated Poets
-PnPJapan Batch Members
-IoT, Deep Learning, Smart Factory, Smart City (smartbean.org forum)
-Explore
-2
-Events
-Groups
-Pages
-Friend Lists
-4
-On This Day
-20+
-Pages Feed
-Manage Apps
-Photos
-Insights
-Games
-See More...
-Create
-Ad · Page · Group · Event
-Stories
-question-solid
-￼
-Raj
-￼
-Jacob
-￼
-Ivan
-￼
-Mary
-￼
-Ritesh
-￼
-Yohhei
-chevron-right
-￼
-2 event invites
-birthday
-Keigo Hattori's birthday is today
-English (US) · 日本語 · Español · Português (Brasil) · Français (France)
-Privacy · Terms · Advertising · Ad Choices · Cookies ·
-More
-Facebook © 2017
+     ￼
+     ￼
+     ￼
+     Search
+     ￼
+     Adam
+     Home
+     Friend Requests
+     Messages
+     Notifications
+     Account Settings
+     ￼
+     Adam Gibson
+     News Feed
+     Messenger
+     Shortcuts
+     IQA(Image Processing QnA) : 영상처리 묻고 답하기
+     20+
+     Montreal.AI
+     1
+     Machine Learning Tokyo (study group)
+     7
+     Foreigners in Tokyo
+     1
+     Artificial Intelligence & Deep Learning Memes For Back-propagated Poets
+     PnPJapan Batch Members
+     IoT, Deep Learning, Smart Factory, Smart City (smartbean.org forum)
+     Explore
+     2
+     Events
+     Groups
+     Pages
+     Friend Lists
+     4
+     On This Day
+     20+
+     Pages Feed
+     Manage Apps
+     Photos
+     Insights
+     Games
+     See More...
+     Create
+     Ad · Page · Group · Event
+     Stories
+     question-solid
+     ￼
+     Raj
+     ￼
+     Jacob
+     ￼
+     Ivan
+     ￼
+     Mary
+     ￼
+     Ritesh
+     ￼
+     Yohhei
+     chevron-right
+     ￼
+     2 event invites
+     birthday
+     Keigo Hattori's birthday is today
+     English (US) · 日本語 · Español · Português (Brasil) · Français (France)
+     Privacy · Terms · Advertising · Ad Choices · Cookies ·
+     More
+     Facebook © 2017
 
-Make PostPhoto/Video AlbumChoose a file to upload￼￼Choose FilesLive Video
-￼
-￼
-What's on your mind?
-Photo/Video￼￼Choose Files
-Feeling/Activity
-News Feed
-￼
-‎Suzana Ilić‎ to Machine Learning Tokyo (study group)
-1 hr · ￼
-Hi all! I just wanted to say that I'm very proud of our group, we started 6 months ago and had over 200 hours of Machine Learning study! お疲れ様でした！Now, the Lodge is closed for 2 weeks and it's a good time for us to take some time off as well! I will let you know when our first session in 2018 will kick off and until then: To a happy, healthy and unforgettable new year! ￼<3
-Like
-Show more reactions
-Comment
-Share
-5 Leung Tatsu, Билгээ Баяраа and 3 others
-Comments
-￼
-Hiromi Oyama
-Manage
-LikeShow more reactions · Reply · 54m
-￼
-Hiromi Oyama Happy holidays!
-Manage
-LikeShow more reactions · Reply · 53m
-￼
-￼
-Write a comment...
-￼￼Choose File
-Masato Uehara was tagged in a photo.
-￼
-Takafumi Matsudome is feeling thankful with Ryusuke Izumida and 3 others.
-16 mins · Minato-ku ·
-#BOP #WASSHA #ハッカソン #チームタロ
-3月のBOPハッカソンで出会ったメンバーで、忘年会できるって、嬉しい限り。
-また来年もまた集まってなんかするーーー！！
-See Translation
-￼
-Like
-Show more reactions
-Comment
-6 6
-Comments
-￼
-Satoshi Akita たのしそう！！
-Manage
-LikeShow more reactions · Reply · See Translation · 8m
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Yoonchul Shin shared 마링의 마음상담소's post.
-20 hrs · ￼
-다시합니다.
-See Translation
-￼
-마링의 마음상담소￼Like Page
-20 hrs · ￼
--일시: 2018.01.03~ 2018.01.17
--장소: 상수역 1번출구 코코갤러리
+     Make PostPhoto/Video AlbumChoose a file to upload￼￼Choose FilesLive Video
+     ￼
+     ￼
+     What's on your mind?
+     Photo/Video￼￼Choose Files
+     Feeling/Activity
+     News Feed
+     ￼
+     ‎Suzana Ilić‎ to Machine Learning Tokyo (study group)
+     1 hr · ￼
+     Hi all! I just wanted to say that I'm very proud of our group, we started 6 months ago and had over 200 hours of Machine Learning study! お疲れ様でした！Now, the Lodge is closed for 2 weeks and it's a good time for us to take some time off as well! I will let you know when our first session in 2018 will kick off and until then: To a happy, healthy and unforgettable new year! ￼<3
+     Like
+     Show more reactions
+     Comment
+     Share
+     5 Leung Tatsu, Билгээ Баяраа and 3 others
+     Comments
+     ￼
+     Hiromi Oyama
+     Manage
+     LikeShow more reactions · Reply · 54m
+     ￼
+     Hiromi Oyama Happy holidays!
+     Manage
+     LikeShow more reactions · Reply · 53m
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     Masato Uehara was tagged in a photo.
+     ￼
+     Takafumi Matsudome is feeling thankful with Ryusuke Izumida and 3 others.
+     16 mins · Minato-ku ·
+     #BOP #WASSHA #ハッカソン #チームタロ
+     3月のBOPハッカソンで出会ったメンバーで、忘年会できるって、嬉しい限り。
+     また来年もまた集まってなんかするーーー！！
+     See Translation
+     ￼
+     Like
+     Show more reactions
+     Comment
+     6 6
+     Comments
+     ￼
+     Satoshi Akita たのしそう！！
+     Manage
+     LikeShow more reactions · Reply · See Translation · 8m
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Yoonchul Shin shared 마링의 마음상담소's post.
+     20 hrs · ￼
+     다시합니다.
+     See Translation
+     ￼
+     마링의 마음상담소￼Like Page
+     20 hrs · ￼
+     -일시: 2018.01.03~ 2018.01.17
+     -장소: 상수역 1번출구 코코갤러리
 
-'마음은 볼 수 없습니다.'
-그래요 어떻게 보나요 눈을 씻고...
-See More
-See Translation
-Like
-Show more reactions
-Comment
-Share
-14 14
-Comments
-￼
-Jae Seok Kim 보러갈께유
-1
-Manage
-LikeShow more reactions · Reply · See Translation · 20h
-￼
-Yoonchul Shin replied · 1 Reply
-￼
-박성근 오 또 보러가야하는데...
-1
-Manage
-LikeShow more reactions · Reply · See Translation · 19h
-￼
-Yoonchul Shin replied · 1 Reply
-￼
-이지나 전시회 시간이 어떻게 돼요??
-1
-Manage
-LikeShow more reactions · Reply · See Translation · 19h
-￼
-Yoonchul Shin replied · 3 Replies
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Leung Tatsu
-16 hrs · ￼
-Already Put it into the list of hk trip from 2/10 to 2/19￼😎
-What a shame that haven visited Hidden agenda yet￼😝
-￼
-香港最老的爵士樂酒吧：不收入場費、親民貼地的La La Land - The News Lens 關鍵評論網
-爵士樂酒吧Ned Kelly Last Stand成立45週年，澳洲老闆Parker接受記者訪問，希望更多人了解他的「娛樂餐飲」意念，以及「Dixieland」這種爵士樂流派的妙處。
-HK.THENEWSLENS.COM
-Like
-Show more reactions
-Comment
-Share
-4 4
-Comments
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Alison B. Lowndes added 5 new photos.
-19 hrs · ￼
-The difference 24 hours & 8C make.
-￼
-￼
-￼
-￼
-￼
-Like
-Show more reactions
-Comment
-Share
-12 12
-Comments
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-太郎 スティーブン
-17 hrs ·
-CNN is the new Onion.
-￼
-Why kids love 'fascist' cartoons like 'Paw Patrol' and 'Thomas'
-Young children are drawn to worlds in which identities are fixed and transgressions are met with routine punishment.
-CNN.COM
-Like
-Show more reactions
-Comment
-Share
-1 1
-Comments
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Christian Moen
-20 hrs ·
-Shako
- · See original ·
-Rate this translation
-￼
-Like
-Show more reactions
-Comment
-15 15
-Comments
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Alison B. Lowndes is with Ben Lowndes and Robyn Lowndes.
-19 hrs · ￼
-Watching Mary Poppins #supercalafragalisticexpealidocious
-￼
-Like
-Show more reactions
-Comment
-Share
-11 11
-Comments
-￼
-Mikayla Phan Where’s mom’s costume??
-1
-Manage
-LikeShow more reactions · Reply · 19h
-￼
-Alexandra McIlwraith aww i want to be there, I know all the words too lol
-1
-Manage
-LikeShow more reactions · Reply · 9h
-￼
-Alison B. Lowndes replied · 1 Reply
-￼
-Mike Wake Too cold to go fly a kite?
-Manage
-LikeShow more reactions · Reply · 2h
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Yuta Okamoto
-18 hrs ·
-Twitter
- · ￼
-自分の目の前で、技術動向が１日単位で変化していく様子をが見られるのは非常にエキサイティングな経験ですね（キャッチアップできているとは言ってない。
-See Translation
-Like
-Show more reactions
-Comment
-Share
-8 8
-Comments
-￼
-大黒 寛仁 「俺たちは雰囲気で」云々
-1
-Manage
-LikeShow more reactions · Reply · See Translation · 15h
-￼
-￼
-Write a comment...
-￼￼Choose File
-￼
-Wei Chuan Chen added 2 new photos — with Ariel Marissa.
-5 hrs · Taito-ku ·
-Ariel is in Tokyo!!! ￼😍
-￼
-￼
-Like
-Show more reactions
-Comment
-40 40
-Comments
-￼
-Chris Michael Kelly Ok this is a VERY small world. I did a few musicals with her back home in New York lolol our hometowns are super close!
-1
-Manage
-LikeShow more reactions · Reply · 4h
-￼
-Wei Chuan Chen replied · 1 Reply
-￼
-Laura Floyd Sharp Hay Wei, we missed you at Christmas. Auntie La loves you and very proud of your accomplishments with school and work.
-Manage
-LikeShow more reactions · Reply · 4h
-￼
-Wei Chuan Chen replied · 1 Reply
-￼
-￼
-Write a comment...
-￼￼Choose File
-More Stories
-Chat with friends
-CONTACT PAGES
-SEE ALL
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-￼
-CONTACTS
-￼
-Ritvik Choudhary
-￼
-Eugene Huang
-￼
-Jana Thompson
-￼
-Yoovraj Shinde
-￼
-1h
-Shawn YS Tan
-￼
-6h
-Chris Nicholson
-￼
-1m
-Suzana Ilić
-￼
-HongJoon Kim
-￼
-Erin Akinci
-￼
-Ahyoung Park
-￼
-Tan Zu Puayen
-￼
-Zain Abiddin
-￼
-Lev Sixteenletters
-￼
-Anthony Seungwook Paek
-￼
-Lee SangHoon
-NEARBY
-￼
-3h
-Takeshi Izaki
-永田町
-MORE CONTACTS (21)
-￼
-Alexander Strunkin
-￼
-Angela Tyson
-￼
-Charles Muguru
-￼
-Cho Sung Kwang
-￼
-Ivan Novikov
-￼
-Jeongyeol Choe
-￼
-Johnathan Davis
-￼
-Jonny Lee
-￼
-Kabjin Kwon
-￼
-Leah Zinn
-￼
-Li Xia
-￼
-Mohit Agrawal
-￼
-Parthojit Chakraborty
-￼
-Robert Haidari
-￼
-Shuntaro Tamura
-￼
-Vicente Vial
+     '마음은 볼 수 없습니다.'
+     그래요 어떻게 보나요 눈을 씻고...
+     See More
+     See Translation
+     Like
+     Show more reactions
+     Comment
+     Share
+     14 14
+     Comments
+     ￼
+     Jae Seok Kim 보러갈께유
+     1
+     Manage
+     LikeShow more reactions · Reply · See Translation · 20h
+     ￼
+     Yoonchul Shin replied · 1 Reply
+     ￼
+     박성근 오 또 보러가야하는데...
+     1
+     Manage
+     LikeShow more reactions · Reply · See Translation · 19h
+     ￼
+     Yoonchul Shin replied · 1 Reply
+     ￼
+     이지나 전시회 시간이 어떻게 돼요??
+     1
+     Manage
+     LikeShow more reactions · Reply · See Translation · 19h
+     ￼
+     Yoonchul Shin replied · 3 Replies
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Leung Tatsu
+     16 hrs · ￼
+     Already Put it into the list of hk trip from 2/10 to 2/19￼😎
+     What a shame that haven visited Hidden agenda yet￼😝
+     ￼
+     香港最老的爵士樂酒吧：不收入場費、親民貼地的La La Land - The News Lens 關鍵評論網
+     爵士樂酒吧Ned Kelly Last Stand成立45週年，澳洲老闆Parker接受記者訪問，希望更多人了解他的「娛樂餐飲」意念，以及「Dixieland」這種爵士樂流派的妙處。
+     HK.THENEWSLENS.COM
+     Like
+     Show more reactions
+     Comment
+     Share
+     4 4
+     Comments
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Alison B. Lowndes added 5 new photos.
+     19 hrs · ￼
+     The difference 24 hours & 8C make.
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     Like
+     Show more reactions
+     Comment
+     Share
+     12 12
+     Comments
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     太郎 スティーブン
+     17 hrs ·
+     CNN is the new Onion.
+     ￼
+     Why kids love 'fascist' cartoons like 'Paw Patrol' and 'Thomas'
+     Young children are drawn to worlds in which identities are fixed and transgressions are met with routine punishment.
+     CNN.COM
+     Like
+     Show more reactions
+     Comment
+     Share
+     1 1
+     Comments
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Christian Moen
+     20 hrs ·
+     Shako
+     · See original ·
+     Rate this translation
+     ￼
+     Like
+     Show more reactions
+     Comment
+     15 15
+     Comments
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Alison B. Lowndes is with Ben Lowndes and Robyn Lowndes.
+     19 hrs · ￼
+     Watching Mary Poppins #supercalafragalisticexpealidocious
+     ￼
+     Like
+     Show more reactions
+     Comment
+     Share
+     11 11
+     Comments
+     ￼
+     Mikayla Phan Where’s mom’s costume??
+     1
+     Manage
+     LikeShow more reactions · Reply · 19h
+     ￼
+     Alexandra McIlwraith aww i want to be there, I know all the words too lol
+     1
+     Manage
+     LikeShow more reactions · Reply · 9h
+     ￼
+     Alison B. Lowndes replied · 1 Reply
+     ￼
+     Mike Wake Too cold to go fly a kite?
+     Manage
+     LikeShow more reactions · Reply · 2h
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Yuta Okamoto
+     18 hrs ·
+     Twitter
+     · ￼
+     自分の目の前で、技術動向が１日単位で変化していく様子をが見られるのは非常にエキサイティングな経験ですね（キャッチアップできているとは言ってない。
+     See Translation
+     Like
+     Show more reactions
+     Comment
+     Share
+     8 8
+     Comments
+     ￼
+     大黒 寛仁 「俺たちは雰囲気で」云々
+     1
+     Manage
+     LikeShow more reactions · Reply · See Translation · 15h
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     ￼
+     Wei Chuan Chen added 2 new photos — with Ariel Marissa.
+     5 hrs · Taito-ku ·
+     Ariel is in Tokyo!!! ￼😍
+     ￼
+     ￼
+     Like
+     Show more reactions
+     Comment
+     40 40
+     Comments
+     ￼
+     Chris Michael Kelly Ok this is a VERY small world. I did a few musicals with her back home in New York lolol our hometowns are super close!
+     1
+     Manage
+     LikeShow more reactions · Reply · 4h
+     ￼
+     Wei Chuan Chen replied · 1 Reply
+     ￼
+     Laura Floyd Sharp Hay Wei, we missed you at Christmas. Auntie La loves you and very proud of your accomplishments with school and work.
+     Manage
+     LikeShow more reactions · Reply · 4h
+     ￼
+     Wei Chuan Chen replied · 1 Reply
+     ￼
+     ￼
+     Write a comment...
+     ￼￼Choose File
+     More Stories
+     Chat with friends
+     CONTACT PAGES
+     SEE ALL
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     ￼
+     CONTACTS
+     ￼
+     Ritvik Choudhary
+     ￼
+     Eugene Huang
+     ￼
+     Jana Thompson
+     ￼
+     Yoovraj Shinde
+     ￼
+     1h
+     Shawn YS Tan
+     ￼
+     6h
+     Chris Nicholson
+     ￼
+     1m
+     Suzana Ilić
+     ￼
+     HongJoon Kim
+     ￼
+     Erin Akinci
+     ￼
+     Ahyoung Park
+     ￼
+     Tan Zu Puayen
+     ￼
+     Zain Abiddin
+     ￼
+     Lev Sixteenletters
+     ￼
+     Anthony Seungwook Paek
+     ￼
+     Lee SangHoon
+     NEARBY
+     ￼
+     3h
+     Takeshi Izaki
+     永田町
+     MORE CONTACTS (21)
+     ￼
+     Alexander Strunkin
+     ￼
+     Angela Tyson
+     ￼
+     Charles Muguru
+     ￼
+     Cho Sung Kwang
+     ￼
+     Ivan Novikov
+     ￼
+     Jeongyeol Choe
+     ￼
+     Johnathan Davis
+     ￼
+     Jonny Lee
+     ￼
+     Kabjin Kwon
+     ￼
+     Leah Zinn
+     ￼
+     Li Xia
+     ￼
+     Mohit Agrawal
+     ￼
+     Parthojit Chakraborty
+     ￼
+     Robert Haidari
+     ￼
+     Shuntaro Tamura
+     ￼
+     Vicente Vial
 
-￼
-Yohhei Someya
+     ￼
+     Yohhei Someya
 
      ';LKJHGFCXDCVFGHJO=-098TRFYUI90-098YTFD78
-Yoonchul Shin
-￼
-Yusuke Kurishima
-￼
-Yuta Flipper Nishimura
-￼
-강신동
-￼
-Search
+     Yoonchul Shin
+     ￼
+     Yusuke Kurishima
+     ￼
+     Yuta Flipper Nishimura
+     ￼
+     강신동
+     ￼
+     Search
 
-Yohhei Someya
-￼
-Yoonchul Shin
-￼
-Yusuke Kurishima
-￼
-Yuta Flipper Nishimura
-￼
-강신동
-￼
-Search
+     Yohhei Someya
+     ￼
+     Yoonchul Shin
+     ￼
+     Yusuke Kurishima
+     ￼
+     Yuta Flipper Nishimura
+     ￼
+     강신동
+     ￼
+     Search
 
-￼
-Yohhei Someya
-￼
-Yoonchul Shin
-￼
-Yusuke Kurishima
-￼
-Yuta Flipper Nishimura
-￼
-강신동
-￼
-Search
-specified for resolution.
+     ￼
+     Yohhei Someya
+     ￼
+     Yoonchul Shin
+     ￼
+     Yusuke Kurishima
+     ￼
+     Yuta Flipper Nishimura
+     ￼
+     강신동
+     ￼
+     Search
+     specified for resolution.
      * @param arrays the arrays to resolve.
      */
     public void resolveVariablesWith(Map<String,INDArray> arrays) {

@@ -1621,6 +1621,15 @@ public class SameDiffTests {
         SDVariable vSum = sd.sum(v, 1);                             //Exception here
     }
 
+
+    @Test
+    public void testSequentialMeans(){
+        SameDiff sd = SameDiff.create();
+        SDVariable in = sd.var("in", new int[]{10,10,10});
+        SDVariable mean1 = sd.mean(in, 2);      //[10,10] out
+        SDVariable mean2 = sd.mean(mean1, 1);   //[10,1] out - ***exception here***
+    }
+
     @Test
     public void testConv2dBasic(){
         int nIn = 3;

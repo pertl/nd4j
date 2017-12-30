@@ -254,7 +254,19 @@ public abstract class DifferentialFunction {
 
     protected void setInstanceId() {
         if(ownName == null) {
-            this.ownName =  sameDiff == null ? UUID.randomUUID().toString() : sameDiff.generateNewVarName(opName(),0);
+            if(sameDiff == null)
+                this.ownName = UUID.randomUUID().toString();
+            else {
+                int argIndex = 0;
+                String varName = sameDiff.generateNewVarName(opName(),argIndex);
+                while(sameDiff.functionExists(varName)) {
+                    varName = sameDiff.generateNewVarName(opName(), argIndex);
+                    argIndex++;
+                }
+
+                this.ownName = varName;
+            }
+
             if(sameDiff != null)
                 sameDiff.putFunctionForId(ownName,this);
         }
