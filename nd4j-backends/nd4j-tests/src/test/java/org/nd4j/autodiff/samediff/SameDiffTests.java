@@ -9,7 +9,6 @@ import org.nd4j.linalg.api.blas.params.MMulTranspose;
 import org.nd4j.linalg.api.buffer.DataBuffer;
 import org.nd4j.linalg.api.buffer.util.DataTypeUtil;
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.api.ops.DynamicCustomOp;
 import org.nd4j.linalg.api.ops.Op;
 import org.nd4j.linalg.api.ops.impl.controlflow.While;
 import org.nd4j.linalg.api.ops.impl.layers.Linear;
@@ -113,20 +112,6 @@ public class SameDiffTests {
     }
 
 
-    @Test
-    public void testDynamicOp() {
-        SameDiff sameDiff = SameDiff.create();
-        DynamicCustomOp dynamicCustomOp = DynamicCustomOp.
-                sameDiffBuilder("testop",sameDiff)
-                .addInputs(sameDiff.var("i1",new int[]{2,2}),
-                        sameDiff.var("i2",new int[]{2,2}))
-                .addOutputShape(new int[]{2,2})
-                .addOutputShape(new int[]{2,3})
-                .build();
-        assertEquals(2,dynamicCustomOp.outputVariables().length);
-
-
-    }
 
 
 
@@ -139,8 +124,8 @@ public class SameDiffTests {
         SDVariable y = sameDiff.var("y", arr);
         SDVariable result = sameDiff.cosineSimilarity(x, y, 1);
         SDVariable addResult = result.add(result);
-
-        assertArrayEquals(new int[]{1, 2}, result.getShape());
+        SDVariable finalReshape = sameDiff.reshape(addResult,1,2);
+        assertArrayEquals(new int[]{1, 2}, finalReshape.getShape());
     }
 
     @Test

@@ -171,6 +171,8 @@ public class DynamicCustomOp extends DifferentialFunction implements CustomOp {
                     if (newVars[i] == null)
                         continue;
                     INDArray arr = attemptToGetOrCreateArrForVar(newVars[i], outputShapes.get(i));
+                    sameDiff.updateShapeForVarName(newVars[i].getVarName(),outputShapes.get(i));
+                    sameDiff.updateArrayForVarName(newVars[i].getVarName(),arr);
                 }
             } else if(getDescriptor().getNumOutputs() < 1) {
                 //this should only happen if we have no way of knowing how many
@@ -182,6 +184,7 @@ public class DynamicCustomOp extends DifferentialFunction implements CustomOp {
             }
 
             outputVariables = newVars;
+            outputVariables[0].getShape();
             if(sameDiff.getOutputsForFunction(this) == null)
                 sameDiff.addOutgoingFor(outputVariables,this);
             return newVars;
@@ -610,7 +613,9 @@ public class DynamicCustomOp extends DifferentialFunction implements CustomOp {
 
             }
 
+            sameDiff.putFunctionForId(ret.getOwnName(),ret);
             ret.outputVariables = outputs.toArray(new SDVariable[outputs.size()]);
+
             return ret;
         }
     }

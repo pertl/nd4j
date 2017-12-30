@@ -3023,7 +3023,6 @@ public class SameDiff {
      */
     public SDVariable reshape(String name,SDVariable iX,
                               int...shape) {
-        shape = Shape.resolveNegativeShapeIfNeccessary(shape,iX.getShape());
         SDVariable result = functionFactory
                 .reshape(iX,shape);
         return updateVariableNameAndReference(result,name);
