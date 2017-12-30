@@ -272,7 +272,7 @@ public abstract class DifferentialFunction {
                 this.ownName = varName;
             }
 
-            if(sameDiff != null)
+            if(sameDiff != null && !(this instanceof SDVariable))
                 sameDiff.putFunctionForId(ownName,this);
         }
     }

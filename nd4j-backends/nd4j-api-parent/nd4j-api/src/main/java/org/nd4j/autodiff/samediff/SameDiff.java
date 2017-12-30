@@ -335,12 +335,16 @@ public class SameDiff {
 
         val newFunctions = new LinkedHashMap<String,DifferentialFunction>();
         for(DifferentialFunction function :functionInstancesById.values())  {
+            if(function instanceof SDVariable) {
+                continue;
+            }
+
             DifferentialFunction clone = cloner.deepCloneDontCloneInstances(
                     function,
                     function.getSameDiff());
             clone.setSameDiff(sameDiff);
             clone.setOwnName(function.getOwnName());
-            if(sameDiff.getFunctionById(function.getOwnName()) == null)
+            if(sameDiff.functionExists(function.getOwnName()))
                 sameDiff.putFunctionForId(function.getOwnName(),function);
             newFunctions.put(function.getOwnName(),clone);
 
@@ -360,6 +364,7 @@ public class SameDiff {
                 output.setSameDiff(sameDiff);
             }
 
+            sameDiff.functionInstancesById.put(function.getOwnName(),function);
         }
 
         for(val reverseArrayEntry : reverseArrayLookup.entrySet()) {
@@ -402,6 +407,10 @@ public class SameDiff {
     public void putFunctionForId(String id,DifferentialFunction function) {
         if(functionInstancesById.containsKey(id)) {
             throw new ND4JIllegalStateException("Function by id already exists!");
+        }
+
+        else if(function instanceof SDVariable) {
+            throw new ND4JIllegalStateException("Function must not be a variable!");
         }
 
         functionInstancesById.put(id,function);
@@ -3894,13 +3903,17 @@ public class SameDiff {
 
                     outer.invokeGraphOn(sameDiff);
 
-                    List<DifferentialFunction> allFunctions = new ArrayList<DifferentialFunction>(sameDiff.functionInstancesById.values());
+                    List<DifferentialFunction> allFunctions = new ArrayList<>(sameDiff.functionInstancesById.values());
                     if(allFunctions.isEmpty()) {
                         throw new ND4JIllegalStateException("No ops found!");
                     }
 
 
                     for(val func : allFunctions) {
+                        if(func instanceof SDVariable) {
+                            continue;
+                        }
+
                         val args = func.args();
                         for(val arg : args)
                             arg.setSameDiff(sameDiff);
