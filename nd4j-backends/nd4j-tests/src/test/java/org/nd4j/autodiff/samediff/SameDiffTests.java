@@ -1587,11 +1587,6 @@ public class SameDiffTests {
 
         for (Activation a : afns) {
 
-            if(a == Activation.RELU || a == Activation.LEAKYRELU){
-                //TODO REMOVE THIS ONCE FIXED
-                fail("Failing now to avoid JVM crash");
-            }
-
             SameDiff sd = SameDiff.create();
             INDArray inArr = Nd4j.linspace(-3, 3, 7);
             INDArray labelArr = Nd4j.linspace(-3, 3, 7).muli(0.5);
@@ -1635,7 +1630,7 @@ public class SameDiffTests {
                     outExp = Transforms.tanh(inArr, true);
                     break;
                 case CUBE:
-                    out = sd.pow("out", in, 3);
+                    out = sd.cube("out", in);
                     outExp = Transforms.pow(inArr, 3, true);
                     break;
                 default:

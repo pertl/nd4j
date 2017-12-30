@@ -1855,6 +1855,17 @@ public class SameDiff {
         return log(null,iX);
     }
 
+
+    /**
+     *
+     * @param iX
+     * @return
+     */
+    public SDVariable cube(SDVariable iX) {
+        return cube(null,iX);
+    }
+
+
     /**
      *
      * @param iX
@@ -2703,6 +2714,18 @@ public class SameDiff {
         return updateVariableNameAndReference(result,name);
 
     }
+
+    /**
+     *
+     * @param iX
+     * @return
+     */
+    public SDVariable cube(String name,SDVariable iX) {
+        SDVariable result = functionFactory.cube(iX);
+        return updateVariableNameAndReference(result,name);
+
+    }
+
 
     /**
      *

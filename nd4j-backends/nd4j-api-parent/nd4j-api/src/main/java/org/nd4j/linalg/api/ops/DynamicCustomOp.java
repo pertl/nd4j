@@ -184,7 +184,6 @@ public class DynamicCustomOp extends DifferentialFunction implements CustomOp {
             }
 
             outputVariables = newVars;
-            outputVariables[0].getShape();
             if(sameDiff.getOutputsForFunction(this) == null)
                 sameDiff.addOutgoingFor(outputVariables,this);
             return newVars;

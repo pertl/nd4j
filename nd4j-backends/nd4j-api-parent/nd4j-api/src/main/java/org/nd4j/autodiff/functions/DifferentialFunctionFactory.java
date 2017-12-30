@@ -350,6 +350,8 @@ public class DifferentialFunctionFactory   {
     }
 
 
+
+
     public SDVariable pow(SDVariable iX, double i_y) {
         return new ScalarMultiplication(  sameDiff(),iX,i_y).outputVariables()[0];
 
@@ -363,6 +365,17 @@ public class DifferentialFunctionFactory   {
 
     public SDVariable square(SDVariable iX) {
         return new Pow(sameDiff(),iX,false,2.0).outputVariables()[0];
+    }
+
+
+    public SDVariable cube(SDVariable iX) {
+        return new Cube(sameDiff(),iX,null).outputVariables()[0];
+
+    }
+
+    public SDVariable cubeDerivative(SDVariable iX) {
+        return new CubeDerivative(sameDiff(),iX,null).outputVariables()[0];
+
     }
 
 
