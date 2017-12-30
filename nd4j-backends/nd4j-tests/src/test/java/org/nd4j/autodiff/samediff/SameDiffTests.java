@@ -196,7 +196,7 @@ public class SameDiffTests {
             }
         }
 
-        f = SameDiff.class.getDeclaredField("ougoingArgsReverse");      //Also: typo in the SameDiff class field name
+        f = SameDiff.class.getDeclaredField("outgoingArgsReverse");      //Also: typo in the SameDiff class field name
         f.setAccessible(true);
         Map<String,String[]> outgoingArgsReverse = (Map<String, String[]>) f.get(sd);
         for(Map.Entry<String,String[]> e : outgoingArgsReverse.entrySet()){
@@ -843,6 +843,50 @@ public class SameDiffTests {
 
             assertArrayEquals(new int[]{minibatch, nOut}, outArr.shape());
         }
+    }
+
+
+
+
+    @Test
+    public void testReductionShapes1() {
+
+        SameDiff sd = SameDiff.create();
+        SDVariable in = sd.var("in", new int[]{10,9,8});
+        SDVariable mean1 = sd.mean(in, 2);      //[10,9] out
+        SDVariable mean2 = sd.mean(mean1, 1);   //[10,1] out
+        sd.execAndEndResult();  //***Exception***
+
+        INDArray m1 = mean1.getArr();
+        INDArray m2 = mean2.getArr();
+
+        assertArrayEquals(new int[]{10,9}, m1.shape());
+        assertArrayEquals(new int[]{10,1}, m2.shape());
+    }
+
+
+
+    @Test
+    public void testReductionShapes2() {
+
+        SameDiff sd2 = SameDiff.create();
+        SDVariable in2 = sd2.var("in", new int[]{10,9,8});
+        SDVariable meanA = sd2.mean(in2, 0);      //[9,8] out
+        assertArrayEquals(new int[]{9,8}, meanA.getShape());
+
+        SDVariable meanB = sd2.mean(meanA, 0);   //[1,8] out
+        assertArrayEquals(new int[]{1,8}, meanB.getShape());
+
+        assertArrayEquals(meanA.getShape(),meanA.getArr().shape());
+        assertArrayEquals(meanB.getShape(),meanB.getArr().shape());
+
+        sd2.exec(); //***Exception***
+
+        INDArray mA = meanA.getArr();
+        INDArray mB = meanB.getArr();
+
+        assertArrayEquals(new int[]{9,8}, mA.shape());
+        assertArrayEquals(new int[]{1,8}, mB.shape());
     }
 
 

@@ -231,10 +231,10 @@ public class Shape {
             return new int[] {1, 1};
         else if (dimensions.length == 1 && wholeShape.length == 2) {
             int[] ret = new int[2];
-            if (dimensions[0] == 0) {
+            if (dimensions[0] == 1) {
                 ret[0] = wholeShape[0];
                 ret[1] = 1;
-            } else if (dimensions[0] == 1) {
+            } else if (dimensions[0] == 0) {
                 ret[0] = 1;
                 ret[1] = wholeShape[1];
             }
