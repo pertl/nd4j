@@ -130,7 +130,9 @@ public abstract class BaseBroadcastOp extends BaseOp implements BroadcastOp {
         List<int[]> ret = new ArrayList<>();
         if (larg().getShape() != null && rarg().getShape() != null)
             ret.add(Shape.broadcastOutputShape(larg().getShape(), rarg().getShape()));
-        ret.add(larg().getShape());
+        else if(larg().getShape() != null)
+            ret.add(larg().getShape());
+
         return ret;
     }
 

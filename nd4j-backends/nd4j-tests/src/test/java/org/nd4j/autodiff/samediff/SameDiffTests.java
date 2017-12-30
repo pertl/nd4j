@@ -1615,6 +1615,13 @@ public class SameDiffTests {
     }
 
     @Test
+    public void testPlaceholderReduceSimple() {
+        SameDiff sd = SameDiff.create();
+        SDVariable v = sd.var("in", new int[]{-1,10});
+        SDVariable vSum = sd.sum(v, 1);                             //Exception here
+    }
+
+    @Test
     public void testConv2dBasic(){
         int nIn = 3;
         int nOut = 4;

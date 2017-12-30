@@ -12,6 +12,7 @@ import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.primitives.Pair;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -130,6 +131,8 @@ public abstract class BaseIndexAccumulation extends BaseOp implements IndexAccum
     @Override
     public List<int[]> calculateOutputShape() {
         List<int[]> ret = new ArrayList<>(1);
+        if(arg().getShape() == null)
+            return Collections.emptyList();
         ret.add(Shape.getReducedShape(arg().getShape(),dimensions));
         return ret;
     }
