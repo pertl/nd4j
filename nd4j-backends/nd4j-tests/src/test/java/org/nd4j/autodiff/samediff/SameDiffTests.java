@@ -1591,7 +1591,10 @@ public class SameDiffTests {
             INDArray inArr = Nd4j.linspace(-3, 3, 7);
             INDArray labelArr = Nd4j.linspace(-3, 3, 7).muli(0.5);
             SDVariable in = sd.var("in", inArr.dup());
-
+            if(a == Activation.RELU || a == Activation.LEAKYRELU){
+                //TODO REMOVE THIS ONCE FIXED
+                fail("Failing now to avoid JVM crash");
+            }
 //            System.out.println("inArr: " + inArr);
 
             INDArray outExp;
