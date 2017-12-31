@@ -170,10 +170,11 @@ public class DynamicCustomOp extends DifferentialFunction implements CustomOp {
                 for (int i = 0; i < newVars.length; i++) {
                     if (newVars[i] == null)
                         continue;
-                    INDArray arr = attemptToGetOrCreateArrForVar(newVars[i], outputShapes.get(i));
-                    sameDiff.updateShapeForVarName(newVars[i].getVarName(),outputShapes.get(i));
-                    sameDiff.updateArrayForVarName(newVars[i].getVarName(),arr);
+                    attemptToGetOrCreateArrForVar(newVars[i], outputShapes.get(i));
                 }
+
+
+
             } else if(getDescriptor().getNumOutputs() < 1) {
                 //this should only happen if we have no way of knowing how many
                 //outputs are known from the descriptor

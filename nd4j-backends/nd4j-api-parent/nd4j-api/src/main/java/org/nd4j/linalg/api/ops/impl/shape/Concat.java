@@ -79,7 +79,19 @@ public class Concat extends DynamicCustomOp {
     @Override
     public void initFromTensorFlow(NodeDef nodeDef, SameDiff initWith, Map<String, AttrValue> attributesForNode, GraphDef graph) {
         int concatDimension = -1;
-        val input = nodeDef.getInput(nodeDef.getInputCount() - 1);
+        String input = null;
+        for(int i = 0; i < nodeDef.getInputCount(); i++) {
+            if(nodeDef.getInput(i).contains("/concat_dim")) {
+                input = nodeDef.getInput(i);
+                break;
+            }
+        }
+
+        //older versions may specify a concat_dim, usually it's the last argument
+        if(input == null) {
+            input = nodeDef.getInput(nodeDef.getInputCount() - 1);
+        }
+
         val variable = initWith.getVariable(input);
         // concat dimension is only possible
         if (variable != null && variable.getArr() == null) {

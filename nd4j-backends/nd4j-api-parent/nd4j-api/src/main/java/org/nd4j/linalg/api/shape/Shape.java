@@ -55,6 +55,15 @@ public class Shape {
 
 
     /**
+     * Returns true if this shape is scalar
+     * @param shape the shape that is scalar
+     * @return
+     */
+    public static boolean shapeIsScalar(int[] shape) {
+        return ArrayUtil.prod(shape) == 1;
+    }
+
+    /**
      * Returns true if any shape has a -1
      * or a null or empty array is passed in
      * @param shape the input shape to validate
@@ -253,6 +262,14 @@ public class Shape {
      * @return the shape of the output array (the left's rows and right's columns)
      */
     public static int[] getMatrixMultiplyShape(int[] left, int[] right) {
+        if(Shape.shapeIsScalar(left)) {
+            return right;
+        }
+
+        if(Shape.shapeIsScalar(right)) {
+            return left;
+        }
+
         if (left.length != 2 && right.length != 2) {
             throw new IllegalArgumentException("Illegal shapes for matrix multiply. Must be of length 2");
         }

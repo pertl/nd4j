@@ -788,7 +788,7 @@ public class SameDiffTests {
     }
 
     @Test
-    public void testShapeResolutionMinus1(){
+    public void testShapeResolutionMinus1() {
         int nIn = 3;
         int nOut = 4;
 
@@ -1035,8 +1035,8 @@ public class SameDiffTests {
         val input1 = sd.var("input",matrix);
         val input2 = sd.var("input2",vector);
         val output = sd.mmul("output",input1,input2,MMulTranspose.builder().transposeA(true).transposeB(false).build());
-        val result = sd.exec();
         assertArrayEquals(new int[]{4,1},output.getShape());
+        val result = sd.exec();
     }
 
 
