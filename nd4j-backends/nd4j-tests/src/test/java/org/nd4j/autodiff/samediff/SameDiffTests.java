@@ -1027,6 +1027,18 @@ public class SameDiffTests {
     }
 
 
+    @Test
+    public void testTransposeWithVector() {
+        val sd = SameDiff.create();
+        val matrix = Nd4j.linspace(1,12,12).reshape(4,3);
+        val vector = Nd4j.linspace(1,4,4).reshape(4,1);
+        val input1 = sd.var("input",matrix);
+        val input2 = sd.var("input2",vector);
+        val output = sd.mmul("output",input1,input2,MMulTranspose.builder().transposeA(true).transposeB(false).build());
+        val result = sd.exec();
+        assertArrayEquals(new int[]{4,1},output.getShape());
+    }
+
 
     @Test
     public void testLogisticRegression() {

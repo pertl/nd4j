@@ -1575,7 +1575,7 @@ public class NativeOpExecutioner extends DefaultOpExecutioner {
                         iArgs, op.numIArguments(),
                         op.isInplaceCall()));
             }catch(Exception e) {
-                log.error("Failed to execute. Please see above message (printed out from c++) for a possible cause of error.");
+                 log.error("Failed to execute. Please see above message (printed out from c++) for a possible cause of error.");
                 throw e;
             }
 

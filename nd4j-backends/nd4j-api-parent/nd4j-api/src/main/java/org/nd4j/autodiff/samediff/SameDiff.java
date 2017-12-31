@@ -13,6 +13,7 @@ import org.nd4j.autodiff.functions.DifferentialFunction;
 import org.nd4j.autodiff.functions.DifferentialFunctionFactory;
 import org.nd4j.autodiff.functions.FunctionProperties;
 import org.nd4j.graph.*;
+import org.nd4j.linalg.api.blas.params.MMulTranspose;
 import org.nd4j.linalg.api.buffer.DataBuffer;
 import org.nd4j.linalg.api.buffer.util.DataTypeUtil;
 import org.nd4j.linalg.api.memory.MemoryWorkspace;
@@ -2151,6 +2152,19 @@ public class SameDiff {
         return rollAxis(null,x,axis);
     }
 
+
+    /**
+     *
+     * @param x
+     * @param y
+     * @param transpose
+     * @return
+     */
+    public SDVariable mmul(SDVariable x, SDVariable y, MMulTranspose transpose) {
+        return mmul(null,x,y,transpose);
+
+    }
+
     /**
      *
      * @param x
@@ -3076,6 +3090,20 @@ public class SameDiff {
 
     }
 
+
+    /**
+     *
+     * @param x
+     * @param y
+     * @param transpose
+     * @return
+     */
+    public SDVariable mmul(String name, SDVariable x, SDVariable y, MMulTranspose transpose) {
+        SDVariable result = functionFactory.mmul(x, y,transpose);
+        return updateVariableNameAndReference(result,name);
+
+    }
+
     /**
      *
      * @param x
@@ -3083,8 +3111,7 @@ public class SameDiff {
      * @return
      */
     public SDVariable mmul(String name,SDVariable x, SDVariable y) {
-        SDVariable result = functionFactory.mmul(x, y);
-        return updateVariableNameAndReference(result,name);
+        return mmul(name,x,y,MMulTranspose.allFalse());
 
     }
 
