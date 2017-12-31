@@ -1035,7 +1035,7 @@ public class SameDiffTests {
         val input1 = sd.var("input",matrix);
         val input2 = sd.var("input2",vector);
         val output = sd.mmul("output",input1,input2,MMulTranspose.builder().transposeA(true).transposeB(false).build());
-        assertArrayEquals(new int[]{4,1},output.getShape());
+        assertArrayEquals(new int[]{3,1},output.getShape());
         val result = sd.exec();
     }
 
