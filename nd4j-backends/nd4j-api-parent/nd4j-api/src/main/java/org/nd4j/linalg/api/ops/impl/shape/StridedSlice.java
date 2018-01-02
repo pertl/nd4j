@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Reshape function
+ * Strided Slice function
  *
  * @author Adam Gibson
  */

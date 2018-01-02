@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import onnx.OnnxProto3;
 import org.nd4j.autodiff.functions.DifferentialFunction;
+import org.nd4j.autodiff.functions.FunctionProperties;
 import org.nd4j.autodiff.samediff.SDVariable;
 import org.nd4j.autodiff.samediff.SameDiff;
 import org.nd4j.imports.NoOpNameFoundException;
@@ -538,6 +539,21 @@ public class DynamicCustomOp extends DifferentialFunction implements CustomOp {
         }
 
     }
+
+
+    /**
+     * Return function properties for the given function
+     * @return
+     */
+    public FunctionProperties asProperties() {
+        return FunctionProperties.builder()
+                .name(opName())
+                .i(iArguments)
+                .d(tArguments)
+                .fieldNames(propertiesForFunction())
+                .build();
+    }
+
 
 
     @Override

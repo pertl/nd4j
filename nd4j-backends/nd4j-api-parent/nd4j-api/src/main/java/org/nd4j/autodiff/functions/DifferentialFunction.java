@@ -17,10 +17,7 @@ import org.tensorflow.framework.AttrValue;
 import org.tensorflow.framework.GraphDef;
 import org.tensorflow.framework.NodeDef;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 
 @Data
@@ -81,7 +78,7 @@ public abstract class DifferentialFunction {
     }
 
     /**
-     * Iniitialize the function from the given
+     * Initialize the function from the given
      * {@link onnx.OnnxProto3.NodeProto}
      * @param node
      */
@@ -89,6 +86,26 @@ public abstract class DifferentialFunction {
         this.sameDiff = sameDiff;
         setInstanceId();
         initFromOnnx(node, sameDiff, attributesForNode, graph);
+    }
+
+    /**
+     * Returns the properties for a given function
+     * @return
+     */
+    public Map<String,Object> propertiesForFunction() {
+        return Collections.emptyMap();
+    }
+
+
+    /**
+     * Return function properties for the given function
+     * @return
+     */
+    public FunctionProperties asProperties() {
+        return FunctionProperties.builder()
+                .name(opName())
+                .fieldNames(propertiesForFunction())
+                .build();
     }
 
 

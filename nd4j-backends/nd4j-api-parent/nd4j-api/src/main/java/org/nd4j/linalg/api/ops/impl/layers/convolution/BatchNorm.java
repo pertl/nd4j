@@ -9,9 +9,7 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.api.ops.DynamicCustomOp;
 import org.nd4j.linalg.util.ArrayUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -48,6 +46,14 @@ public class BatchNorm extends DynamicCustomOp {
 
     public BatchNorm() {}
 
+    @Override
+    public Map<String, Object> propertiesForFunction() {
+        Map<String,Object> ret = new LinkedHashMap<>();
+        ret.put("training",training);
+        ret.put("isLockGammaBeta",isLockGammaBeta);
+        ret.put("isMiniBatch",isMiniBatch);
+        return ret;
+    }
 
     @Override
     public String opName() {

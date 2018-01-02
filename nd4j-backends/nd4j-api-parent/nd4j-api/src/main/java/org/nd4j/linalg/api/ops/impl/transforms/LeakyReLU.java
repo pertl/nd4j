@@ -25,7 +25,9 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.api.ops.BaseTransformOp;
 
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**Leaky Rectified linear unit. Default alpha=0.01, cutoff=0<br>
  * Out(x) = alpha*x if x<0<br>
@@ -104,6 +106,14 @@ public class LeakyReLU extends BaseTransformOp {
         super(x);
         this.extraArgs = new Object[] {alpha};
     }
+
+    @Override
+    public Map<String, Object> propertiesForFunction() {
+        Map<String,Object> ret = new LinkedHashMap<>();
+        ret.put("alpha",alpha);
+        return ret;
+    }
+
 
     @Override
     public int opNum() {

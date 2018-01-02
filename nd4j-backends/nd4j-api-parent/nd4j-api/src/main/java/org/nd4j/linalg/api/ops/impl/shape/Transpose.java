@@ -33,10 +33,7 @@ import org.tensorflow.framework.AttrValue;
 import org.tensorflow.framework.GraphDef;
 import org.tensorflow.framework.NodeDef;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Transpose function
@@ -54,6 +51,12 @@ public class Transpose extends DynamicCustomOp {
     public Transpose() {}
 
 
+    @Override
+    public Map<String, Object> propertiesForFunction() {
+        Map<String,Object> ret = new LinkedHashMap<>();
+        ret.put("permuteDims",permuteDims);
+        return ret;
+    }
 
 
     @Override

@@ -32,6 +32,7 @@ import org.tensorflow.framework.GraphDef;
 import org.tensorflow.framework.NodeDef;
 
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,6 +80,14 @@ public class ExpandDims extends DynamicCustomOp {
             addIArgument(this.axis);
         }
     }
+
+    @Override
+    public Map<String, Object> propertiesForFunction() {
+        Map<String,Object> ret = new LinkedHashMap<>();
+        ret.put("axis",axis);
+        return ret;
+    }
+
 
     @Override
     public void assertValidForExecution() {

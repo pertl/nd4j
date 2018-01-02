@@ -8,6 +8,7 @@ import org.tensorflow.framework.AttrValue;
 import org.tensorflow.framework.GraphDef;
 import org.tensorflow.framework.NodeDef;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -48,6 +49,12 @@ public class Unstack extends DynamicCustomOp {
     }
 
 
+    @Override
+    public Map<String, Object> propertiesForFunction() {
+        Map<String,Object> ret = new LinkedHashMap<>();
+        ret.put("axis",axis);
+        return ret;
+    }
 
 
 

@@ -61,7 +61,10 @@ public class Conv2D extends DynamicCustomOp {
 
     }
 
-
+    @Override
+    public Map<String, Object> propertiesForFunction() {
+        return conv2DConfig.toProperties();
+    }
 
     @Override
     public void initFromTensorFlow(NodeDef nodeDef, SameDiff initWith, Map<String, AttrValue> attributesForNode, GraphDef graph) {

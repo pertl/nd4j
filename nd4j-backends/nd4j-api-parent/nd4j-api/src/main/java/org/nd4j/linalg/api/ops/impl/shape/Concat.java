@@ -5,7 +5,6 @@ import lombok.val;
 import onnx.OnnxProto3;
 import org.nd4j.autodiff.samediff.SameDiff;
 import org.nd4j.imports.NoOpNameFoundException;
-import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.api.ops.DynamicCustomOp;
 import org.nd4j.linalg.api.ops.Op;
 import org.nd4j.linalg.exception.ND4JIllegalStateException;
@@ -13,6 +12,7 @@ import org.tensorflow.framework.AttrValue;
 import org.tensorflow.framework.GraphDef;
 import org.tensorflow.framework.NodeDef;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Slf4j
@@ -72,11 +72,6 @@ public class Concat extends DynamicCustomOp {
     }
 
     @Override
-    public void addInputArgument(INDArray... arg) {
-        super.addInputArgument(arg);
-    }
-
-    @Override
     public void initFromTensorFlow(NodeDef nodeDef, SameDiff initWith, Map<String, AttrValue> attributesForNode, GraphDef graph) {
         int concatDimension = -1;
         String input = null;
@@ -117,6 +112,14 @@ public class Concat extends DynamicCustomOp {
 
         sameDiff.removeArgFromFunction(input,this);
     }
+
+    @Override
+    public Map<String, Object> propertiesForFunction() {
+        Map<String,Object> ret = new LinkedHashMap<>();
+        ret.put("concatDimension",concatDimension);
+        return ret;
+    }
+
 
     @Override
     public void initFromOnnx(OnnxProto3.NodeProto node, SameDiff initWith, Map<String, OnnxProto3.AttributeProto> attributesForNode, OnnxProto3.GraphProto graph) {

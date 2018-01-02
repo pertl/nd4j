@@ -1,6 +1,5 @@
 package org.nd4j.linalg.api.ops.impl.transforms;
 
-import org.nd4j.autodiff.functions.DifferentialFunction;
 import org.nd4j.autodiff.samediff.SDVariable;
 import org.nd4j.autodiff.samediff.SameDiff;
 import org.nd4j.imports.NoOpNameFoundException;
@@ -8,7 +7,9 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.api.ops.BaseTransformOp;
 import org.nd4j.linalg.factory.Nd4j;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author raver119@gmail.com
@@ -49,6 +50,14 @@ public class Histogram extends BaseTransformOp {
     public Histogram(INDArray x, int numberOfBins) {
         this(x, Nd4j.create(numberOfBins));
     }
+
+    @Override
+    public Map<String, Object> propertiesForFunction() {
+        Map<String,Object> ret = new LinkedHashMap<>();
+        ret.put("numBins",numBins);
+        return ret;
+    }
+
 
     @Override
     public int opNum() {

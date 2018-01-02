@@ -7,8 +7,12 @@ import org.tensorflow.framework.AttrValue;
 import org.tensorflow.framework.GraphDef;
 import org.tensorflow.framework.NodeDef;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Split op
+ */
 public class Split extends DynamicCustomOp {
 
     private int numSplit;
@@ -30,4 +34,12 @@ public class Split extends DynamicCustomOp {
        addIArgument(numSplits);
 
     }
+
+    @Override
+    public Map<String, Object> propertiesForFunction() {
+        Map<String,Object> ret = new LinkedHashMap<>();
+        ret.put("numSplit",numSplit);
+        return ret;
+    }
+
 }

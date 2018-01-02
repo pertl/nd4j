@@ -12,6 +12,7 @@ import org.nd4j.linalg.util.ArrayUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @Slf4j
 public class FullConv3D extends DynamicCustomOp {
+
     protected FullConv3DConfig conv3DConfig;
 
     @Builder(builderMethodName = "builder")
@@ -39,7 +41,10 @@ public class FullConv3D extends DynamicCustomOp {
 
     public FullConv3D() {}
 
-
+    @Override
+    public Map<String, Object> propertiesForFunction() {
+        return conv3DConfig.toProperties();
+    }
 
     private void addArgs() {
         addIArgument(new int[]{

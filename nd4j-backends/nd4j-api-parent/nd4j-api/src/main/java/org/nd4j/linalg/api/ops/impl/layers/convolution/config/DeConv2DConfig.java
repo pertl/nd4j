@@ -3,6 +3,9 @@ package org.nd4j.linalg.api.ops.impl.layers.convolution.config;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 @Builder
 @Data
 public class DeConv2DConfig {
@@ -10,5 +13,17 @@ public class DeConv2DConfig {
     private boolean isSameMode;
 
 
-
+    public Map<String,Object> toProperties() {
+        Map<String,Object> ret = new LinkedHashMap<>();
+        ret.put("kY",kY);
+        ret.put("kX",kX);
+        ret.put("sY",sY);
+        ret.put("sX",sX);
+        ret.put("pY",pY);
+        ret.put("pX",pX);
+        ret.put("dY",dY);
+        ret.put("dX",dX);
+        ret.put("isSameMode",isSameMode);
+        return ret;
+    }
 }

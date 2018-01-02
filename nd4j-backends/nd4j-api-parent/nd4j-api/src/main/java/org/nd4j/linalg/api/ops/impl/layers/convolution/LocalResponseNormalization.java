@@ -50,6 +50,10 @@ public class LocalResponseNormalization extends DynamicCustomOp {
 
     public LocalResponseNormalization() {}
 
+    @Override
+    public Map<String, Object> propertiesForFunction() {
+        return config.toProperties();
+    }
 
     private void addArgs() {
         addTArgument(config.getAlpha());

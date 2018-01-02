@@ -50,6 +50,10 @@ public class MaxPooling2D extends DynamicCustomOp {
         addArgs();
     }
 
+    @Override
+    public Map<String, Object> propertiesForFunction() {
+        return config.toProperties();
+    }
 
     private void addArgs() {
         addIArgument(
