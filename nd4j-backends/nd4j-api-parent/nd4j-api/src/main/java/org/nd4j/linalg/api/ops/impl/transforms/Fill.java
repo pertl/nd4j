@@ -82,7 +82,7 @@ public class Fill extends DynamicCustomOp {
 
     @Override
     public String opName() {
-        return "fill_as";
+        return "fill";
     }
 
     @Override

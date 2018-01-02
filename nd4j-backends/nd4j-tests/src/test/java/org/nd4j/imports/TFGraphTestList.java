@@ -47,14 +47,14 @@ public class TFGraphTestList {
             //"mlp_00",
             //"mnist_00",
           //  "node_multiple_out",// -> Need to map multiple out values to graph node output values
-            //"primitive_lstm",
-            "stack",
-            "stack_1d",
-            "stack_scalar"
+            "primitive_lstm",
+          //  "stack",
+          //  "stack_1d",
+            //"stack_scalar"
             //"transform_0",
             //"transpose",
        //     "transpose_00",
-           // "unstack"
+          //  "unstack"
     };
     //change this to SAMEDIFF for samediff
     public static TFGraphTestAllHelper.ExecuteWith executeWith = ExecuteWith.SAMEDIFF;
