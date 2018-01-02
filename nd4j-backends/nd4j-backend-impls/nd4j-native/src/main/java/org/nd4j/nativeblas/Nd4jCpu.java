@@ -200,6 +200,7 @@ public class Nd4jCpu extends org.nd4j.nativeblas.Nd4jCpuPresets {
         float_zeta.class,
         float_polygamma.class,
         float_fill.class,
+        float_split.class,
         float_clipbyvalue.class,
         float_clipbynorm.class,
         float_clipbyavgnorm.class,
@@ -411,6 +412,7 @@ public class Nd4jCpu extends org.nd4j.nativeblas.Nd4jCpuPresets {
         half_zeta.class,
         half_polygamma.class,
         half_fill.class,
+        half_split.class,
         half_clipbyvalue.class,
         half_clipbynorm.class,
         half_clipbyavgnorm.class,
@@ -622,6 +624,7 @@ public class Nd4jCpu extends org.nd4j.nativeblas.Nd4jCpuPresets {
         double_zeta.class,
         double_polygamma.class,
         double_fill.class,
+        double_split.class,
         double_clipbyvalue.class,
         double_clipbynorm.class,
         double_clipbyavgnorm.class,
@@ -5900,6 +5903,16 @@ public static class NativeOps extends org.nd4j.nativeblas.NativeOps {
     public native ShapeList calculateOutputShapesDouble(@Cast("Nd4jPointer*") PointerPointer extraPointers, @Cast("Nd4jIndex") long hash, @Cast("Nd4jPointer*") PointerPointer inputShapes, int numInputShapes, DoublePointer tArgs, int numTArgs, IntPointer iArgs, int numIArgs);
     public native ShapeList calculateOutputShapesDouble(@Cast("Nd4jPointer*") PointerPointer extraPointers, @Cast("Nd4jIndex") long hash, @Cast("Nd4jPointer*") PointerPointer inputShapes, int numInputShapes, DoubleBuffer tArgs, int numTArgs, IntBuffer iArgs, int numIArgs);
     public native ShapeList calculateOutputShapesDouble(@Cast("Nd4jPointer*") PointerPointer extraPointers, @Cast("Nd4jIndex") long hash, @Cast("Nd4jPointer*") PointerPointer inputShapes, int numInputShapes, double[] tArgs, int numTArgs, int[] iArgs, int numIArgs);
+
+    public native ShapeList calculateOutputShapesFloat(@Cast("Nd4jPointer*") PointerPointer extraPointers, @Cast("Nd4jIndex") long hash, @Cast("Nd4jPointer*") PointerPointer inputBuffers, @Cast("Nd4jPointer*") PointerPointer inputShapes, int numInputShapes, FloatPointer tArgs, int numTArgs, IntPointer iArgs, int numIArgs);
+    public native ShapeList calculateOutputShapesFloat(@Cast("Nd4jPointer*") PointerPointer extraPointers, @Cast("Nd4jIndex") long hash, @Cast("Nd4jPointer*") PointerPointer inputBuffers, @Cast("Nd4jPointer*") PointerPointer inputShapes, int numInputShapes, FloatBuffer tArgs, int numTArgs, IntBuffer iArgs, int numIArgs);
+    public native ShapeList calculateOutputShapesFloat(@Cast("Nd4jPointer*") PointerPointer extraPointers, @Cast("Nd4jIndex") long hash, @Cast("Nd4jPointer*") PointerPointer inputBuffers, @Cast("Nd4jPointer*") PointerPointer inputShapes, int numInputShapes, float[] tArgs, int numTArgs, int[] iArgs, int numIArgs);
+    public native ShapeList calculateOutputShapesHalf(@Cast("Nd4jPointer*") PointerPointer extraPointers, @Cast("Nd4jIndex") long hash, @Cast("Nd4jPointer*") PointerPointer inputBuffers, @Cast("Nd4jPointer*") PointerPointer inputShapes, int numInputShapes, @Cast("float16*") ShortPointer tArgs, int numTArgs, IntPointer iArgs, int numIArgs);
+    public native ShapeList calculateOutputShapesHalf(@Cast("Nd4jPointer*") PointerPointer extraPointers, @Cast("Nd4jIndex") long hash, @Cast("Nd4jPointer*") PointerPointer inputBuffers, @Cast("Nd4jPointer*") PointerPointer inputShapes, int numInputShapes, @Cast("float16*") ShortBuffer tArgs, int numTArgs, IntBuffer iArgs, int numIArgs);
+    public native ShapeList calculateOutputShapesHalf(@Cast("Nd4jPointer*") PointerPointer extraPointers, @Cast("Nd4jIndex") long hash, @Cast("Nd4jPointer*") PointerPointer inputBuffers, @Cast("Nd4jPointer*") PointerPointer inputShapes, int numInputShapes, @Cast("float16*") short[] tArgs, int numTArgs, int[] iArgs, int numIArgs);
+    public native ShapeList calculateOutputShapesDouble(@Cast("Nd4jPointer*") PointerPointer extraPointers, @Cast("Nd4jIndex") long hash, @Cast("Nd4jPointer*") PointerPointer inputBuffers, @Cast("Nd4jPointer*") PointerPointer inputShapes, int numInputShapes, DoublePointer tArgs, int numTArgs, IntPointer iArgs, int numIArgs);
+    public native ShapeList calculateOutputShapesDouble(@Cast("Nd4jPointer*") PointerPointer extraPointers, @Cast("Nd4jIndex") long hash, @Cast("Nd4jPointer*") PointerPointer inputBuffers, @Cast("Nd4jPointer*") PointerPointer inputShapes, int numInputShapes, DoubleBuffer tArgs, int numTArgs, IntBuffer iArgs, int numIArgs);
+    public native ShapeList calculateOutputShapesDouble(@Cast("Nd4jPointer*") PointerPointer extraPointers, @Cast("Nd4jIndex") long hash, @Cast("Nd4jPointer*") PointerPointer inputBuffers, @Cast("Nd4jPointer*") PointerPointer inputShapes, int numInputShapes, double[] tArgs, int numTArgs, int[] iArgs, int numIArgs);
 
     public native void deleteShapeList(@Cast("Nd4jPointer") Pointer shapeList);
 
@@ -24567,6 +24580,60 @@ private native void allocate();
                 return (double_fill)super.position(position);
             }
         public double_fill() { super((Pointer)null); allocate(); }
+private native void allocate();
+                                                                                    public native ShapeList calculateOutputShape(ShapeList inputShape, @ByRef DoubleContext block);
+                                                                                }
+
+        /**
+         * This operation splits given NDArray into chunks of specific size, along given dimension
+         * Input arrays:
+         * 0 - input array
+         * 1 - array of sizes
+         * 2 - optional axis
+         * 
+         * Integer arguments:
+         * 0 - optional axis
+         * 
+         */
+        @Name("nd4j::ops::split<float>") public static class float_split extends FloatDeclarableCustomOp {
+            static { Loader.load(); }
+            /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+            public float_split(Pointer p) { super(p); }
+            /** Native array allocator. Access with {@link Pointer#position(long)}. */
+            public float_split(long size) { super((Pointer)null); allocateArray(size); }
+            private native void allocateArray(long size);
+            @Override public float_split position(long position) {
+                return (float_split)super.position(position);
+            }
+        public float_split() { super((Pointer)null); allocate(); }
+private native void allocate();
+                                                                                    public native ShapeList calculateOutputShape(ShapeList inputShape, @ByRef FloatContext block);
+                                                                                }
+        @Name("nd4j::ops::split<float16>") public static class half_split extends HalfDeclarableCustomOp {
+            static { Loader.load(); }
+            /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+            public half_split(Pointer p) { super(p); }
+            /** Native array allocator. Access with {@link Pointer#position(long)}. */
+            public half_split(long size) { super((Pointer)null); allocateArray(size); }
+            private native void allocateArray(long size);
+            @Override public half_split position(long position) {
+                return (half_split)super.position(position);
+            }
+        public half_split() { super((Pointer)null); allocate(); }
+private native void allocate();
+                                                                                    public native ShapeList calculateOutputShape(ShapeList inputShape, @ByRef HalfContext block);
+                                                                                }
+        @Name("nd4j::ops::split<double>") public static class double_split extends DoubleDeclarableCustomOp {
+            static { Loader.load(); }
+            /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+            public double_split(Pointer p) { super(p); }
+            /** Native array allocator. Access with {@link Pointer#position(long)}. */
+            public double_split(long size) { super((Pointer)null); allocateArray(size); }
+            private native void allocateArray(long size);
+            @Override public double_split position(long position) {
+                return (double_split)super.position(position);
+            }
+        public double_split() { super((Pointer)null); allocate(); }
 private native void allocate();
                                                                                     public native ShapeList calculateOutputShape(ShapeList inputShape, @ByRef DoubleContext block);
                                                                                 }
