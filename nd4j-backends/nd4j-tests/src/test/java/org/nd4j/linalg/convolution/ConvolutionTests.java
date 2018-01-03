@@ -1599,7 +1599,7 @@ public class ConvolutionTests extends BaseNd4jTest {
             INDArray x = Nd4j.linspace(1, len, len).reshape('c', 2, 4, 4, 2);
 
             DynamicCustomOp op = DynamicCustomOp.builder("avgpool2d")
-                    .addIntegerArguments(new int[]{2, 2, 2, 2, 0, 0, 1, 1, 1, 1, 1})
+                    .addIntegerArguments(new int[]{2, 2, 2, 2, 0, 0, 1, 1, 1, 1, 1})        //ky, kx, sy, sx, py, px, dy, dx, isSameMode, ???, divisor, nchw
                     .addInputs(x)
                     .addOutputs(Nd4j.create(new int[]{2, 2, 2, 2}, outputOrder))
                     .build();
@@ -1609,6 +1609,45 @@ public class ConvolutionTests extends BaseNd4jTest {
             INDArray out = op.getOutputArgument(0);
 
             assertEquals("Output order: " + outputOrder, exp, out);
+
+            /*
+            k=2, s=2, p=0, d=1, same mode, divisor = 1
+
+
+            //c order: strides are descending... i.e., last dimension changes quickest
+
+            //Minibatch 0:
+                //Depth 0
+            [ 0,  1
+              2,  3
+              4,  5
+              6,  7 ]
+
+                //Depth 1
+             [ 8,  9
+              10, 11
+              12, 13
+              14, 15 ]
+
+                //Depth 2
+             [16, 17
+              18, 19
+              20, 21
+              22, 23 ]
+
+                //Depth 3
+             [24, 25
+              26, 27
+              28, 29
+              30, 31 ]
+
+
+
+            //Minibatch 1:
+
+             */
+
+
         }
     }
 
@@ -1715,7 +1754,7 @@ public class ConvolutionTests extends BaseNd4jTest {
             DynamicCustomOp op = DynamicCustomOp.builder("avgpool2d")
                     .addIntegerArguments(new int[]{2, 2, 2, 2, 0, 0, 1, 1, 0, 1, 1})
                     .addInputs(x)
-                    .addOutputs(Nd4j.create(new int[]{2, 5, 5, 2}, outputOrder))
+                    .addOutputs(Nd4j.create(new int[]{2, 2, 2, 2}, outputOrder))
                     .build();
 
             Nd4j.getExecutioner().exec(op);
@@ -1725,6 +1764,96 @@ public class ConvolutionTests extends BaseNd4jTest {
             assertEquals("Output order: " + outputOrder, exp, out);
         }
     }
+
+
+    @Test
+    public void testPooling7() {
+        for( char outputOrder : new char[]{'c', 'f'}) {
+            INDArray exp = Nd4j.create(new float[]{7.f, 9.f, 17.f, 19.f, 32.f, 34.f, 42.f, 44.f, 57.f, 59.f, 67.f, 69.f, 82.f, 84.f, 92.f, 94.f}, new int[]{2, 2, 2, 2}, 'c');
+
+            int len = 2 * 2 * 5 * 5;
+            INDArray x = Nd4j.linspace(1, len, len).reshape('c', 2, 2, 5, 5);
+
+            DynamicCustomOp op = DynamicCustomOp.builder("maxpool2d")
+                    .addIntegerArguments(new int[]{2, 2, 2, 2, 0, 0, 1, 1, 0, 1, 0})
+                    .addInputs(x)
+                    .addOutputs(Nd4j.create(new int[]{2, 2, 2, 2}, outputOrder))
+                    .build();
+
+            Nd4j.getExecutioner().exec(op);
+
+            INDArray out = op.getOutputArgument(0);
+
+            assertEquals("Output order: " + outputOrder, exp, out);
+        }
+    }
+
+    @Test
+    public void testPooling8() {
+        for( char outputOrder : new char[]{'c', 'f'}) {
+            INDArray exp = Nd4j.create(new float[]{1.f, 2.5f, 4.5f, 8.5f, 10.f, 12.f, 18.5f, 20.f, 22.f, 26.f, 27.5f, 29.5f, 33.5f, 35.f, 37.f, 43.5f, 45.f, 47.f,  51.f, 52.5f, 54.5f,  58.5f, 60.f, 62.f, 68.5f, 70.f, 72.f,  76.f, 77.5f, 79.5f, 83.5f, 85.f, 87.f,  93.5f, 95.f, 97.f}, new int[]{2, 2, 3, 3}, 'c');
+
+            int len = 2 * 2 * 5 * 5;
+            INDArray x = Nd4j.linspace(1, len, len).reshape('c', 2, 2, 5, 5);
+
+            DynamicCustomOp op = DynamicCustomOp.builder("avgpool2d")
+                    .addIntegerArguments(new int[]{2, 2, 2, 2, 1, 1, 1, 1, 0, 1, 0})
+                    .addInputs(x)
+                    .addOutputs(Nd4j.create(new int[]{2, 2, 3, 3}, outputOrder))
+                    .build();
+
+            Nd4j.getExecutioner().exec(op);
+
+            INDArray out = op.getOutputArgument(0);
+
+            assertEquals("Output order: " + outputOrder, exp, out);
+        }
+    }
+
+    @Test
+    public void testPooling9() {
+        for( char outputOrder : new char[]{'c', 'f'}) {
+            INDArray exp = Nd4j.create(new float[]{0.25f, 1.25f, 2.25f,  4.25f, 10.f, 12.f, 9.25f, 20.f, 22.f, 6.5f, 13.75f, 14.75f, 16.75f, 35.f, 37.f,  21.75f, 45.f, 47.f,  12.75f, 26.25f, 27.25f,  29.25f, 60.f, 62.f, 34.25f, 70.f, 72.f, 19.f, 38.75f, 39.75f, 41.75f, 85.f, 87.f, 46.75f, 95.f, 97.f}, new int[]{2, 2, 3, 3}, 'c');
+
+            int len = 2 * 2 * 5 * 5;
+            INDArray x = Nd4j.linspace(1, len, len).reshape('c', 2, 2, 5, 5);
+
+            DynamicCustomOp op = DynamicCustomOp.builder("avgpool2d")
+                    .addIntegerArguments(new int[]{2, 2, 2, 2, 1, 1, 1, 1, 0, 0, 0})
+                    .addInputs(x)
+                    .addOutputs(Nd4j.create(new int[]{2, 2, 3, 3}, outputOrder))
+                    .build();
+
+            Nd4j.getExecutioner().exec(op);
+
+            INDArray out = op.getOutputArgument(0);
+
+            assertEquals("Output order: " + outputOrder, exp, out);
+        }
+    }
+
+    @Test
+    public void testPooling10() {
+        for( char outputOrder : new char[]{'c', 'f'}) {
+            INDArray exp = Nd4j.create(new float[]{4.f, 6.f, 7.5f, 14.f, 16.f, 17.5f,  21.5f, 23.5f, 25.f, 29.f, 31.f, 32.5f, 39.f, 41.f, 42.5f, 46.5f, 48.5f, 50.f, 54.f, 56.f, 57.5f,  64.f, 66.f, 67.5f, 71.5f, 73.5f, 75.f, 79.f, 81.f, 82.5f, 89.f, 91.f, 92.5f,  96.5f, 98.5f, 100.f}, new int[]{2, 2, 3, 3}, 'c');
+
+            int len = 2 * 2 * 5 * 5;
+            INDArray x = Nd4j.linspace(1, len, len).reshape('c', 2, 2, 5, 5);
+
+            DynamicCustomOp op = DynamicCustomOp.builder("avgpool2d")
+                    .addIntegerArguments(new int[]{2, 2, 2, 2, 0, 0, 1, 1, 1, 0, 0})
+                    .addInputs(x)
+                    .addOutputs(Nd4j.create(new int[]{2, 2, 3, 3}, outputOrder))
+                    .build();
+
+            Nd4j.getExecutioner().exec(op);
+
+            INDArray out = op.getOutputArgument(0);
+
+            assertEquals("Output order: " + outputOrder, exp, out);
+        }
+    }
+
 
     @Override
     public char ordering() {
