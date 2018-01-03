@@ -100,12 +100,22 @@ public class SDVariable extends DifferentialFunction implements Serializable {
 
     @Override
     public SDVariable[] outputVariables() {
-        return new SDVariable[0];
+        return new SDVariable[] {this};
+    }
+
+    @Override
+    public SDVariable arg() {
+        return this;
+    }
+
+    @Override
+    public SDVariable[] args() {
+        return new SDVariable[] {this};
     }
 
     @Override
     public SDVariable[] outputVariables(String baseName) {
-        return new SDVariable[0];
+        return new SDVariable[] {this};
     }
 
 

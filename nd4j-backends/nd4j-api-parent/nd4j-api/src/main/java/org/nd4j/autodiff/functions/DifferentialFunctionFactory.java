@@ -88,17 +88,17 @@ public class DifferentialFunctionFactory   {
                 .shape(iX.getShape())
                 .varName(iName)
                 .sameDiff(sameDiff())
-                .build().outputVariables()[0];
+                .build();
     }
 
 
     public SDVariable zero(int[] shape) {
-        return sameDiff.zero("one-" + UUID.randomUUID().toString(),shape).outputVariables()[0];
+        return sameDiff.zero("one-" + UUID.randomUUID().toString(),shape);
     }
 
 
     public SDVariable one(int[] shape) {
-        return sameDiff.one("one-" + UUID.randomUUID().toString(),shape).outputVariables()[0];
+        return sameDiff.one("one-" + UUID.randomUUID().toString(),shape);
     }
 
 

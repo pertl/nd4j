@@ -68,6 +68,33 @@ public class SameDiffTests {
     }
 
     @Test
+    public void testMseBackwards() {
+
+        SameDiff sd = SameDiff.create();
+
+        int nOut = 4;
+        int minibatch = 3;
+        SDVariable input = sd.var("in", new int[]{-1,nOut});
+        SDVariable label = sd.var("label", new int[]{-1, nOut});
+
+        SDVariable diff = input.sub(label);
+        SDVariable sqDiff = diff.mul(diff);
+        SDVariable msePerEx = sd.mean("msePerEx", sqDiff, 1);
+        SDVariable avgMSE = sd.mean("loss", msePerEx, 0);
+
+        INDArray inputArr = Nd4j.rand(minibatch, nOut);
+        INDArray labelArr = Nd4j.rand(minibatch, nOut);
+
+        sd.associateArrayWithVariable(inputArr, input);
+        sd.associateArrayWithVariable(labelArr, label);
+
+        INDArray result = sd.execAndEndResult();
+        assertEquals(1, result.length());
+
+        Pair<Map<SDVariable, DifferentialFunction>, List<DifferentialFunction>> p = sd.execBackwards();
+    }
+
+    @Test
     public void testEvalVariable() {
         SameDiff sameDiff = SameDiff.create();
         INDArray ones = Nd4j.ones(4);
