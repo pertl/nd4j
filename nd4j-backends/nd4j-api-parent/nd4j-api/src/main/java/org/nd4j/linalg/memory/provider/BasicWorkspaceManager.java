@@ -225,7 +225,7 @@ public abstract class BasicWorkspaceManager implements MemoryWorkspaceManager {
 
         @Override
         public void run() {
-            while (Thread.interrupted() == false) {
+            while (true) {
                 try {
                     Nd4jWorkspace.GarbageWorkspaceReference reference = (Nd4jWorkspace.GarbageWorkspaceReference) queue.remove();
                     if (reference != null) {
