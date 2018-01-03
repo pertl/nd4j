@@ -1565,13 +1565,13 @@ public class ConvolutionTests extends BaseNd4jTest {
 
                 //https://github.com/deeplearning4j/libnd4j/blob/master/include/ops/declarable/generic/convo/pooling/avgpool2d.cpp
                 DynamicCustomOp op1 = DynamicCustomOp.builder("avgpool2d")
-                        .addIntegerArguments(new int[]{2, 2, 1, 1, 0, 0, 1, 1, 1, 0, 1})   //ky, kx, sy, sx, py, px, dy, dx, isSameMode, ???, divisor
+                        .addIntegerArguments(new int[]{2, 2, 1, 1, 0, 0, 1, 1, 1, 1, 0})   //ky, kx, sy, sx, py, px, dy, dx, isSameMode, ???, divisor, nchw
                         .addInputs(input)
                         .addOutputs(Nd4j.create(new int[]{1, 1, 3, 3}, outputOrder))
                         .build();
 
                 DynamicCustomOp op2 = DynamicCustomOp.builder("avgpool2d")
-                        .addIntegerArguments(new int[]{2, 2, 1, 1, 0, 0, 1, 1, 1, 0, 0})   //ky, kx, sy, sx, py, px, dy, dx, isSameMode, ???, divisor
+                        .addIntegerArguments(new int[]{2, 2, 1, 1, 0, 0, 1, 1, 1, 0, 0})   //ky, kx, sy, sx, py, px, dy, dx, isSameMode, ???, divisor, nchw
                         .addInputs(input)
                         .addOutputs(Nd4j.create(new int[]{1, 1, 3, 3}, outputOrder))
                         .build();
