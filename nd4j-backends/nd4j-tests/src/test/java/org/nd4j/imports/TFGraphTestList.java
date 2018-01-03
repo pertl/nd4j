@@ -45,7 +45,7 @@ public class TFGraphTestList {
             //"lstm_mnist",
            // "math_mul_order",
             //"mlp_00",
-            //"mnist_00",
+            //"mnist_00",i
           //  "node_multiple_out",// -> Need to map multiple out values to graph node output values
             "primitive_lstm",
           //  "stack",

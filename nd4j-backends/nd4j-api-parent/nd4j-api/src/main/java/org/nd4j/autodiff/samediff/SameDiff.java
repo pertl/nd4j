@@ -5755,7 +5755,11 @@ public class SameDiff {
                         Accumulation accumulation = (Accumulation) differentialFunction;
 
                         Nd4j.getExecutioner().exec(accumulation,axes);
-
+                        if(differentialFunction.outputVariables()[0].getArr() == null) {
+                            val var = differentialFunction.outputVariables()[0];
+                            updateArrayForVarName(var.getVarName(),accumulation.z());
+                            updateShapeForVarName(var.getVarName(),accumulation.z().shape());
+                        }
                     }
 
                     else if(differentialFunction instanceof BroadcastOp) {

@@ -10567,6 +10567,9 @@ public static final long MAX_UINT = MAX_UINT();
             public native @StdVector FloatPointer getTArguments();
             public native @StdVector IntPointer getIArguments();
 
+            public native int numT();
+            public native int numI();
+
             public native IntIntPair input(int idx);
 
             public native int opNum();
@@ -10617,6 +10620,9 @@ public static final long MAX_UINT = MAX_UINT();
             public native @Cast("float16*") @StdVector ShortPointer getTArguments();
             public native @StdVector IntPointer getIArguments();
 
+            public native int numT();
+            public native int numI();
+
             public native IntIntPair input(int idx);
 
             public native int opNum();
@@ -10666,6 +10672,9 @@ public static final long MAX_UINT = MAX_UINT();
 
             public native @StdVector DoublePointer getTArguments();
             public native @StdVector IntPointer getIArguments();
+
+            public native int numT();
+            public native int numI();
 
             public native IntIntPair input(int idx);
 

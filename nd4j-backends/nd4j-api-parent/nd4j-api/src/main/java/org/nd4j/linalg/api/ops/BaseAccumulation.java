@@ -59,6 +59,9 @@ public abstract class BaseAccumulation extends BaseOp implements Accumulation {
                             int[] dimensions,boolean keepDims) {
         super(sameDiff,new Object[]{dimensions});
         if (i_v != null) {
+            if(dimensions == null || dimensions.length < 1)
+                dimensions = new int[] {Integer.MAX_VALUE};
+
             this.dimensions = dimensions;
             f().validateDifferentialFunctionsameDiff(i_v);
             this.keepDims = keepDims;
@@ -80,7 +83,11 @@ public abstract class BaseAccumulation extends BaseOp implements Accumulation {
                             int[] dimensions,boolean keepDims) {
         super(sameDiff,new Object[]{dimensions});
         if (i_v != null) {
+            if(dimensions == null || dimensions.length < 1)
+                dimensions = new int[] {Integer.MAX_VALUE};
+
             this.dimensions = dimensions;
+
             this.xVertexId = i_v.getVarName();
             this.yVertexId = i_v2.getVarName();
             f().validateDifferentialFunctionsameDiff(i_v);
