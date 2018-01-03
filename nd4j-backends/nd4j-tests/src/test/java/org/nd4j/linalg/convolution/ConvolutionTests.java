@@ -38,6 +38,7 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.nd4j.linalg.api.ops.executioner.OpStatus.ND4J_STATUS_OK;
 import static org.nd4j.linalg.indexing.NDArrayIndex.all;
 import static org.nd4j.linalg.indexing.NDArrayIndex.point;
 
@@ -1589,6 +1590,141 @@ public class ConvolutionTests extends BaseNd4jTest {
         }
     }
 
+    @Test
+    public void testPooling1() {
+        for( char outputOrder : new char[]{'c', 'f'}) {
+            INDArray exp = Nd4j.create(new float[]{6.f, 7.f, 10.f, 11.f, 22.f, 23.f, 26.f, 27.f, 38.f, 39.f, 42.f, 43.f, 54.f, 55.f, 58.f, 59.f}, new int[]{2, 2, 2, 2}, 'c');
+
+            int len = 2 * 4 * 4 * 2;
+            INDArray x = Nd4j.linspace(1, len, len).reshape('c', 2, 4, 4, 2);
+
+            DynamicCustomOp op = DynamicCustomOp.builder("avgpool2d")
+                    .addIntegerArguments(new int[]{2, 2, 2, 2, 0, 0, 1, 1, 1, 1, 1})
+                    .addInputs(x)
+                    .addOutputs(Nd4j.create(new int[]{2, 2, 2, 2}, outputOrder))
+                    .build();
+
+            Nd4j.getExecutioner().exec(op);
+
+            INDArray out = op.getOutputArgument(0);
+
+            assertEquals("Output order: " + outputOrder, exp, out);
+        }
+    }
+
+
+    @Test
+    public void testPooling2() {
+        for( char outputOrder : new char[]{'c', 'f'}) {
+            INDArray exp = Nd4j.create(new float[]{6.f, 7.f,  10.f,  11.f,  22.f,  23.f,  26.f,  27.f,  38.f,  39.f,  42.f,  43.f,  54.f,  55.f,  58.f, 59.f}, new int[]{2, 2, 2, 2}, 'c');
+
+            int len = 2 * 4 * 4 * 2;
+            INDArray x = Nd4j.linspace(1, len, len).reshape('c', 2, 4, 4, 2);
+
+            DynamicCustomOp op = DynamicCustomOp.builder("avgpool2d")
+                    .addIntegerArguments(new int[]{2, 2, 2, 2, 0, 0, 1, 1, 0, 1, 1})
+                    .addInputs(x)
+                    .addOutputs(Nd4j.create(new int[]{2, 2, 2, 2}, outputOrder))
+                    .build();
+
+            Nd4j.getExecutioner().exec(op);
+
+            INDArray out = op.getOutputArgument(0);
+
+            assertEquals("Output order: " + outputOrder, exp, out);
+        }
+    }
+
+    @Test
+    public void testPooling3() {
+        for( char outputOrder : new char[]{'c', 'f'}) {
+            INDArray exp = Nd4j.create(new float[]{11.f,  12.f,  15.f,  16.f,  27.f,  28.f,  31.f,  32.f,  43.f,  44.f,  47.f,  48.f,  59.f,  60.f,  63.f, 64.f}, new int[]{2, 2, 2, 2}, 'c');
+
+            int len = 2 * 4 * 4 * 2;
+            INDArray x = Nd4j.linspace(1, len, len).reshape('c', 2, 4, 4, 2);
+
+            DynamicCustomOp op = DynamicCustomOp.builder("maxpool2d")
+                    .addIntegerArguments(new int[]{2, 2, 2, 2, 0, 0, 1, 1, 1, 1, 1})
+                    .addInputs(x)
+                    .addOutputs(Nd4j.create(new int[]{2, 2, 2, 2}, outputOrder))
+                    .build();
+
+            Nd4j.getExecutioner().exec(op);
+
+            INDArray out = op.getOutputArgument(0);
+
+            assertEquals("Output order: " + outputOrder, exp, out);
+        }
+    }
+
+
+    @Test
+    public void testPooling4() {
+        for( char outputOrder : new char[]{'c', 'f'}) {
+            INDArray exp = Nd4j.create(new float[]{11.f,  12.f,  15.f,  16.f,  27.f,  28.f,  31.f,  32.f,  43.f,  44.f,  47.f,  48.f,  59.f,  60.f,  63.f, 64.f}, new int[]{2, 2, 2, 2}, 'c');
+
+            int len = 2 * 4 * 4 * 2;
+            INDArray x = Nd4j.linspace(1, len, len).reshape('c', 2, 4, 4, 2);
+
+            DynamicCustomOp op = DynamicCustomOp.builder("maxpool2d")
+                    .addIntegerArguments(new int[]{2, 2, 2, 2, 0, 0, 1, 1, 0, 1, 1})
+                    .addInputs(x)
+                    .addOutputs(Nd4j.create(new int[]{2, 2, 2, 2}, outputOrder))
+                    .build();
+
+            Nd4j.getExecutioner().exec(op);
+
+            INDArray out = op.getOutputArgument(0);
+
+            assertEquals("Output order: " + outputOrder, exp, out);
+        }
+    }
+
+
+    @Test
+    public void testPooling5() {
+        for( char outputOrder : new char[]{'c', 'f'}) {
+            INDArray exp = Nd4j.create(new float[]{7.f,    8.f,   11.f,   12.f,   14.f,   15.f,   27.f,   28.f,   31.f,   32.f,   34.f,   35.f, 42.f,   43.f,   46.f,   47.f,   49.f,   50.f,   57.f,   58.f,   61.f,   62.f,   64.f,   65.f, 77.f,   78.f,   81.f,   82.f,   84.f,   85.f,   92.f,   93.f,   96.f,   97.f,   99.f,  100.f}, new int[]{2, 3, 3, 2}, 'c');
+
+            int len = 2 * 5 * 5 * 2;
+            INDArray x = Nd4j.linspace(1, len, len).reshape('c', 2, 5, 5, 2);
+
+            DynamicCustomOp op = DynamicCustomOp.builder("avgpool2d")
+                    .addIntegerArguments(new int[]{2, 2, 2, 2, 0, 0, 1, 1, 1, 1, 1})
+                    .addInputs(x)
+                    .addOutputs(Nd4j.create(new int[]{2, 3, 3, 2}, outputOrder))
+                    .build();
+
+            Nd4j.getExecutioner().exec(op);
+
+            INDArray out = op.getOutputArgument(0);
+
+            assertEquals("Output order: " + outputOrder, exp, out);
+        }
+    }
+
+
+    @Test
+    public void testPooling6() {
+        for( char outputOrder : new char[]{'c', 'f'}) {
+            INDArray exp = Nd4j.create(new float[]{7.f,   8.f,  11.f,  12.f,  27.f,  28.f,  31.f,  32.f,  57.f,  58.f,  61.f,  62.f,  77.f,  78.f,  81.f, 82.f}, new int[]{2, 2, 2, 2}, 'c');
+
+            int len = 2 * 5 * 5 * 2;
+            INDArray x = Nd4j.linspace(1, len, len).reshape('c', 2, 5, 5, 2);
+
+            DynamicCustomOp op = DynamicCustomOp.builder("avgpool2d")
+                    .addIntegerArguments(new int[]{2, 2, 2, 2, 0, 0, 1, 1, 0, 1, 1})
+                    .addInputs(x)
+                    .addOutputs(Nd4j.create(new int[]{2, 5, 5, 2}, outputOrder))
+                    .build();
+
+            Nd4j.getExecutioner().exec(op);
+
+            INDArray out = op.getOutputArgument(0);
+
+            assertEquals("Output order: " + outputOrder, exp, out);
+        }
+    }
 
     @Override
     public char ordering() {
