@@ -28,6 +28,7 @@ import org.nd4j.linalg.api.buffer.DataBuffer;
 import org.nd4j.linalg.api.buffer.util.AllocUtil;
 import org.nd4j.linalg.api.buffer.util.DataTypeUtil;
 import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.api.ops.DynamicCustomOp;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.factory.Nd4jBackend;
 import org.nd4j.linalg.indexing.INDArrayIndex;
@@ -1518,6 +1519,66 @@ public class ConvolutionTests extends BaseNd4jTest {
         INDArray assertcol2im = OldConvolution.col2im(im2col, stride, padding, height, width);
         INDArray col2im = Convolution.col2im(im2col, stride, padding, height, width);
         assertEquals(assertcol2im, col2im);
+    }
+
+
+    @Test
+    public void testPoolingEdgeCases(){
+        //Average pooling with same mode: should we include the padded values, when deciding what to divide by?
+
+        /*
+        Input:
+        [ 1, 2, 3
+          4, 5, 6
+          7, 8, 9 ]
+
+         Kernel 2, stride 1
+         outH = 3, outW = 3 (i.e., ceil(in/stride)
+         totalHPad = (outH-1) * strideH + kH - inH = (3-1)*1 + 2 - 3 = 1
+         topPad = 0, bottomPad = 1
+         leftPad = 0, rightPad = 1
+         */
+
+        INDArray input = Nd4j.create(1,1,3,3);
+        input.get(point(0), point(0), all(), all())
+                .assign(Nd4j.linspace(1,9,9).reshape('c', 3,3));
+
+        INDArray sums = Nd4j.create(new double[][]{
+                {(1+2+4+5), (2+3+5+6), (3+6)},
+                {(4+5+7+8), (5+6+8+9), (6+9)},
+                {(7+8), (8+9), (9)}
+        });
+
+        INDArray divEnabled = Nd4j.create(new double[][]{
+                {4,4,2},
+                {4,4,2},
+                {2,2,1}
+        });
+
+        INDArray expEnabled = sums.div(divEnabled);
+        INDArray expDefault = sums.div(4);
+
+        //https://github.com/deeplearning4j/libnd4j/blob/master/include/ops/declarable/generic/convo/pooling/avgpool2d.cpp
+        DynamicCustomOp op1 = DynamicCustomOp.builder("avgpool2d")
+                .addIntegerArguments(new int[]{2,2,1,1,0,0,1,1,1,0,1})   //ky, kx, sy, sx, py, px, dy, dx, isSameMode, ???, divisor
+                .addInputs(input)
+                .addOutputs(Nd4j.create(1,1,3,3))
+                .build();
+
+        DynamicCustomOp op2 = DynamicCustomOp.builder("avgpool2d")
+                .addIntegerArguments(new int[]{2,2,1,1,0,0,1,1,1,0,0})   //ky, kx, sy, sx, py, px, dy, dx, isSameMode, ???, divisor
+                .addInputs(input)
+                .addOutputs(Nd4j.create(1,1,3,3))
+                .build();
+
+        Nd4j.getExecutioner().exec(op1);
+        Nd4j.getExecutioner().exec(op2);
+        INDArray actEnabled = op1.getOutputArgument(0);
+        INDArray actDefault = op2.getOutputArgument(0);
+
+
+        assertEquals(expDefault, actDefault.get(point(0), point(0), all(), all()));
+        assertEquals(expEnabled, actEnabled.get(point(0), point(0), all(), all()));
     }
 
 
