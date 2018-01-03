@@ -1854,6 +1854,28 @@ public class ConvolutionTests extends BaseNd4jTest {
         }
     }
 
+    @Test
+    public void testPooling11() {
+        for( char outputOrder : new char[]{'c', 'f'}) {
+            INDArray exp = Nd4j.create(new float[]{3, 4, 6, 7}, new int[]{1, 1, 2, 2}, 'c');
+
+            int len = 1 * 1 * 3 * 3;
+            INDArray x = Nd4j.linspace(1, len, len).reshape('c', 1, 1, 3, 3);
+
+            DynamicCustomOp op = DynamicCustomOp.builder("avgpool2d")
+                    .addIntegerArguments(new int[]{2, 2, 1, 1, 0, 0, 1, 1, 0, 0, 0})
+                    .addInputs(x)
+                    .addOutputs(Nd4j.create(new int[]{1, 1, 2, 2}, outputOrder))
+                    .build();
+
+            Nd4j.getExecutioner().exec(op);
+
+            INDArray out = op.getOutputArgument(0);
+
+            assertEquals("Output order: " + outputOrder, exp, out);
+        }
+    }
+
 
     @Override
     public char ordering() {
