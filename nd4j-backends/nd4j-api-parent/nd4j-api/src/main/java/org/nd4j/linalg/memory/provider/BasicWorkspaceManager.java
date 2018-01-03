@@ -225,8 +225,7 @@ public abstract class BasicWorkspaceManager implements MemoryWorkspaceManager {
 
         @Override
         public void run() {
-            while (true) {
-                System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            while (Thread.interrupted() == false) {
                 try {
                     Nd4jWorkspace.GarbageWorkspaceReference reference = (Nd4jWorkspace.GarbageWorkspaceReference) queue.remove();
                     if (reference != null) {
@@ -269,7 +268,7 @@ public abstract class BasicWorkspaceManager implements MemoryWorkspaceManager {
                         referenceMap.remove(reference.getKey());
                     }
                 } catch (Exception e) {
-                    //
+                    throw new RuntimeException(e);
                 }
             }
         }
